@@ -1,4 +1,47 @@
 //////////
+// define assets for each institute
+//////////
+
+#let FAUAssets = (
+  Kennung: image("../assets/FAU/FAUKennung.svg"),
+  KennungWhite: image("../assets/FAU/FAUKennungWhite.svg"),
+  Title: image("../assets/FAU/FAUTitle.jpg"),
+)
+
+#let MedAssets = (
+  Kennung: image("../assets/Med/MedKennung.svg"),
+  KennungWhite: image("../assets/Med/MedKennungWhite.svg"),
+  Title: image("../assets/Med/MedTitle.jpg"),
+)
+
+#let NatAssets = (
+  Kennung: image("../assets/Nat/NatKennung.svg"),
+  KennungWhite: image("../assets/Nat/NatKennungWhite.svg"),
+  Title: image("../assets/Nat/NatTitle.jpg"),
+)
+
+#let PhilAssets = (
+  Kennung: image("../assets/Phil/PhilKennung.svg"),
+  KennungWhite: image("../assets/Phil/PhilKennungWhite.svg"),
+  Title: image("../assets/Phil/PhilTitle.jpg"),
+)
+
+#let RWAssets = (
+  Kennung: image("../assets/RW/RWKennung.svg"),
+  KennungWhite: image("../assets/RW/RWKennungWhite.svg"),
+  Title: image("../assets/RW/RWTitle.jpg"),
+)
+
+#let TechAssets = (
+  Kennung: image("../assets/Tech/TechKennung.svg"),
+  KennungWhite: image("../assets/Tech/TechKennungWhite.svg"),
+  Title: image("../assets/Tech/TechTitle.jpg"),
+)
+
+#let WortmarkeBlue = image("../assets/FAUWortmarkeBlau.svg")
+#let WortmarkeWhite = image("../assets/FAUWortmarkeWhite.svg")
+
+//////////
 // define colors and their dark versions
 /////////
 

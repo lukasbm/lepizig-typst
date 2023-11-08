@@ -1,12 +1,13 @@
 # FAU Typst theme
 
-TODO: convert all pdfs to svgs, as typst does not support pdfs yet!
-
-Write a little shell script with imagemagick for it!
-
 ## Develop
 
-`cd example && typst watch  --root .. test.typ test.pdf`
+`cd example && typst watch --root .. --font-path fau-beamer-main/fonts test.typ test.pdf`
+
+### Helper: convert all pdfs to svgs
+
+`find . -type f -name "*.pdf" -exec sh -c 'pdf2svg "$0" "${0%.pdf}.svg"' {} \;`
+
 
 ## Sources
 

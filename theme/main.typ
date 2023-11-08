@@ -14,7 +14,6 @@
 #let fau-short-date = state("fau-short-date", none)
 #let fau-institution = state("fau-institution", none)
 
-
 #let fau-theme(
   aspect-ratio: "16-9",
   short-title: none,
@@ -43,7 +42,7 @@
   title: [],
   subtitle: none,
   authors: (),
-  institution-name: "University",
+  institution-name: "FAU",
   date: none,
   logo: none,
 ) = {

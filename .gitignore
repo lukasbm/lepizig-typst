@@ -1,7 +1,5 @@
-
-
 # fau template (local dev)
 fau-beamer-main
 
-# output files
-test.pdf
+# pdf files (as typst does not support them)
+*.pdf

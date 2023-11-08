@@ -1,6 +1,10 @@
 #import "@preview/polylux:0.3.1": logic
 #import "@preview/polylux:0.3.1": utils
 
+#import "elements.typ": *
+#import "colors.typ": *
+
+
 #let fau-colors = state(
   "fau-colors",
   (a: rgb("#0C6291"), b: rgb("#A63446"), c: rgb("#FBFEF9")),

@@ -22,6 +22,16 @@
   #lorem(40)
 ]
 
+#slide(title: [Blocks])[
+  #fau-block(title: "test")[
+    asdasdasd
+  ]
+
+  #block()[
+    asdasdasd
+  ]
+]
+
 #focus-slide(background-img: image("../assets/FAU/FAUTitle.jpg"))[
   *Another variant with an image in background...*
 ]

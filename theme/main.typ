@@ -4,11 +4,6 @@
 #import "elements.typ": *
 #import "colors.typ": *
 
-#let fau_short_title = state("fau_short_title", "")
-#let fau_short_author = state("fau_short_author", "")
-#let fau_short_date = state("fau_short_date", "")
-#let fau_institution = state("fau-institution", "FAU")
-
 ///////////////
 // Define state
 ///////////////
@@ -19,7 +14,7 @@
   short-title: none,
   short-author: none,
   short-date: none,
-  institution: "tech",
+  institution: "Tech",
   body,
 ) = {
   set page(
@@ -31,13 +26,15 @@
   set text(font: "FAUSans Office", size: 24pt)
   show footnote.entry: set text(size: .6em)
 
-  body // HAS TO BE HERE OTHERWISE BROKEN (this also causes the layout convergence issue!)
+  // define global state
+  let _ = state("short-title", short-title)
+  let _ = state("short-author", short-author)
+  let _ = state("short-date", short-date)
+  let _ = state("assets", AllAssets.at(institution))
+  let _ = state("color", AllColors.at(institution))
+  let _ = state("institution", institution)
 
-  fau_institution.update(institution)
-  fau_short_title.update(short-title)
-  fau_short_author.update(short-author)
-  fau_short_date.update(short-date)
-  
+  body
 }
 
 /////////////////
@@ -153,9 +150,9 @@
         grid(
           columns: (25%, 1fr, 15%, 10%),
           rows: (1.5em, auto),
-          cell(fill: colors.a, fau_short_author.display()),
-          cell(fau_short_title.display()),
-          cell(fau_short_date.display()),
+          cell(fill: colors.a, state("short-author").display()),
+          cell(state("short-title").display()),
+          cell(state("short-date").display()),
           cell(logic.logical-slide.display() + [~/~] + utils.last-slide-number),
         )
       })

@@ -50,6 +50,8 @@
   "RW": RWAssets,
 )
 
+#let assets = state("assets").display()
+
 //////////
 // define colors and their dark versions
 /////////
@@ -136,16 +138,16 @@
   "RW": RWColors,
 )
 
-#let colors = FAUColors
+#let colors = state("colors").display()
 
 /////////////////////////
 // Define different shades for BaseColor and BaseDarkColor
 /////////////////////////
 
-#let BaseColorA = colors.BaseColor.darken(62.5%)
-#let BaseColorB = colors.BaseColor.darken(37.5%)
-#let BaseColorC = colors.BaseColor.darken(25.0%)
-#let BaseColorD = colors.BaseColor.darken(12.5%)
+#let BaseColorA = colors.at("BaseColor").darken(62.5%)
+#let BaseColorB = colors.at("BaseColor").darken(37.5%)
+#let BaseColorC = colors.at("BaseColor").darken(25.0%)
+#let BaseColorD = colors.at("BaseColor").darken(12.5%)
 
 #let BaseDarkColorA = colors.BaseDarkColor.darken(62.5%)
 #let BaseDarkColorB = colors.BaseDarkColor.darken(37.5%)

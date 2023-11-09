@@ -5,7 +5,7 @@
   short-author: "Lukas Böhm",
   short-title: "Test Document",
   short-date: datetime.today(),
-  institution: "tech",
+  institution: "Tech",
 )
 
 #title-slide(title: "Test Document showing off the theme", subtitle: "in typst")

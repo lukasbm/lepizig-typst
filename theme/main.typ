@@ -4,16 +4,16 @@
 #import "elements.typ": *
 #import "colors.typ": *
 
+#let fau_short_title = state("fau_short_title", "")
+#let fau_short_author = state("fau_short_author", "")
+#let fau_short_date = state("fau_short_date", "")
+#let fau_institution = state("fau-institution", "FAU")
 
-#let fau-colors = state(
-  "fau-colors",
-  (a: rgb("#0C6291"), b: rgb("#A63446"), c: rgb("#FBFEF9")),
-)
-#let fau-short-title = state("fau-short-title", none)
-#let fau-short-author = state("fau-short-author", none)
-#let fau-short-date = state("fau-short-date", none)
-#let fau-institution = state("fau-institution", none)
+///////////////
+// Define state
+///////////////
 
+// sets up state
 #let fau-theme(
   aspect-ratio: "16-9",
   short-title: none,
@@ -31,31 +31,42 @@
   set text(font: "FAUSans Office", size: 24pt)
   show footnote.entry: set text(size: .6em)
 
-  fau-short-title.update(short-title)
-  fau-short-author.update(short-author)
-  fau-short-date.update(short-date)
+  body // HAS TO BE HERE OTHERWISE BROKEN (this also causes the layout convergence issue!)
 
-  body
+  fau_institution.update(institution)
+  fau_short_title.update(short-title)
+  fau_short_author.update(short-author)
+  fau_short_date.update(short-date)
+  
 }
 
-#let title-slide(
-  title: [],
-  subtitle: none,
-  authors: (),
-  institution-name: "FAU",
-  date: none,
-  logo: none,
-) = {
-  set text(font: "FAUSans Office", size: 25pt)
+/////////////////
+// slides
+/////////////////
 
-  let authors = if type(authors) == "array" { authors } else { (authors,) }
+#let title-slide(
+  title: "Title",
+  subtitle: "Subtitle",
+  authors: ("author1", "author 2"),
+  institution: "FAU",
+  date: datetime.today(),
+) = {
+  let background-color = FAUBlue
+  let background-img = FAUAssets.Title
+
+  set text(fill: white, font: "FAUSans Office", size: 20pt)
+  set page(background: {
+    set image(fit: "stretch", width: 100%, height: 100%)
+    background-img
+  }, margin: 1em)
 
   let content = locate(loc => {
-    let colors = fau-colors.at(loc)
+    let colors = (a: FAUBlue, b: FAUBlue, c: FAUBlue)
 
-    if logo != none {
-      align(right, logo)
-    }
+    // let logo = WortmarkeBlue
+    // if logo != none {
+    //   align(right, logo)
+    // }
 
     align(center + horizon, {
       block(inset: 0em, breakable: false, {
@@ -73,6 +84,7 @@
         ..authors.map(author => text(fill: black, author)),
       )
       v(1em)
+      let institution-name = "test"
       if institution-name != none {
         parbreak()
         text(size: .9em, institution-name)
@@ -84,7 +96,7 @@
     })
   })
 
-  logic.polylux-slide(content)
+  logic.polylux-slide(text(content))
 }
 
 #let slide(title: none, header: none, footer: none, new-section: none, body) = {
@@ -99,7 +111,7 @@
       }
       locate(
         loc => {
-          let colors = fau-colors.at(loc)
+          let colors = (a: FAUBlue, b: FAUBlue, c: FAUBlue)
           block(
             fill: colors.c,
             inset: (x: .5em),
@@ -135,15 +147,15 @@
       footer
     } else {
       locate(loc => {
-        let colors = fau-colors.at(loc)
+        let colors = (a: FAUBlue, b: FAUBlue, c: FAUBlue)
 
         show: block.with(width: 100%, height: auto, fill: colors.b)
         grid(
           columns: (25%, 1fr, 15%, 10%),
           rows: (1.5em, auto),
-          cell(fill: colors.a, fau-short-author.display()),
-          cell(fau-short-title.display()),
-          cell(fau-short-date.display()),
+          cell(fill: colors.a, fau_short_author.display()),
+          cell(fau_short_title.display()),
+          cell(fau_short_date.display()),
           cell(logic.logical-slide.display() + [~/~] + utils.last-slide-number),
         )
       })
@@ -177,52 +189,4 @@
   set text(fill: white, size: 2em)
 
   logic.polylux-slide(align(horizon, body))
-}
-
-#let matrix-slide(columns: none, rows: none, ..bodies) = {
-  let bodies = bodies.pos()
-
-  let columns = if type(columns) == "integer" {
-    (1fr,) * columns
-  } else if columns == none {
-    (1fr,) * bodies.len()
-  } else {
-    columns
-  }
-  let num-cols = columns.len()
-
-  let rows = if type(rows) == "integer" {
-    (1fr,) * rows
-  } else if rows == none {
-    let quotient = calc.quo(bodies.len(), num-cols)
-    let correction = if calc.rem(bodies.len(), num-cols) == 0 { 0 } else { 1 }
-    (1fr,) * (quotient + correction)
-  } else {
-    rows
-  }
-  let num-rows = rows.len()
-
-  if num-rows * num-cols < bodies.len() {
-    panic(
-      "number of rows (" + str(num-rows) + ") * number of columns (" + str(num-cols) + ") must at least be number of content arguments (" + str(bodies.len()) + ")",
-    )
-  }
-
-  let cart-idx(i) = (calc.quo(i, num-cols), calc.rem(i, num-cols))
-  let color-body(idx-body) = {
-    let (idx, body) = idx-body
-    let (row, col) = cart-idx(idx)
-    let color = if calc.even(row + col) { white } else { silver }
-    set align(center + horizon)
-    rect(inset: .5em, width: 100%, height: 100%, fill: color, body)
-  }
-
-  let content = grid(
-    columns: columns,
-    rows: rows,
-    gutter: 0pt,
-    ..bodies.enumerate().map(color-body),
-  )
-
-  logic.polylux-slide(content)
 }

@@ -41,6 +41,15 @@
 #let WortmarkeBlue = image("../assets/FAUWortmarkeBlau.svg")
 #let WortmarkeWhite = image("../assets/FAUWortmarkeWhite.svg")
 
+#let AllAssets = (
+  "FAU": FAUAssets,
+  "Tech": TechAssets,
+  "Med": MedAssets,
+  "Nat": NatAssets,
+  "Phil": PhilAssets,
+  "RW": RWAssets,
+)
+
 //////////
 // define colors and their dark versions
 /////////
@@ -76,15 +85,11 @@
 // according to the specified institute.
 ////////////////////////
 
-// #let darken(color, amount) = color.mix(color,  black, amount)
-#let darken(color, amount) = color.mix(color, luma(amount))
-
-#let TitleFont = white
-
 #let FAUColors = (
   BaseColor: FAUBlue,
   BaseDarkColor: FAUDarkBlue,
-  SeparationLineColor: darken(FAUBlue, 62.5),
+  SeparationLineColor: FAUBlue.darken(62.5%),
+  TitleFont: white,
 )
 
 #let PhilColors = (
@@ -98,37 +103,51 @@
   BaseColor: RWRed,
   BaseDarkColor: RWDarkRed,
   SeparationLineColor: RWDarkRed,
+  TitleFont: white,
 )
 
 #let MedColors = (
   BaseColor: MedBlue,
   BaseDarkColor: MedDarkBlue,
   SeparationLineColor: MedDarkBlue,
+  TitleFont: white,
 )
 
 #let NatColors = (
   BaseColor: NatGreen,
   BaseDarkColor: NatDarkGreen,
   SeparationLineColor: NatDarkGreen,
+  TitleFont: white,
 )
 
 #let TechColors = (
   BaseColor: TechMetallic,
   BaseDarkColor: TechDarkMetallic,
   SeparationLineColor: TechDarkMetallic,
+  TitleFont: white,
 )
+
+#let AllColors = (
+  "FAU": FAUColors,
+  "Tech": TechColors,
+  "Med": MedColors,
+  "Nat": NatColors,
+  "Phil": PhilColors,
+  "RW": RWColors,
+)
+
+#let colors = FAUColors
 
 /////////////////////////
 // Define different shades for BaseColor and BaseDarkColor
 /////////////////////////
 
-// FIXME: dependent on state!
-// #let BaseColorA = darken(BaseColor, 62.5)
-// #let BaseColorB = darken(BaseColor, 37.5)
-// #let BaseColorC = darken(BaseColor, 25.0)
-// #let BaseColorD = darken(BaseColor, 12.5)
+#let BaseColorA = colors.BaseColor.darken(62.5%)
+#let BaseColorB = colors.BaseColor.darken(37.5%)
+#let BaseColorC = colors.BaseColor.darken(25.0%)
+#let BaseColorD = colors.BaseColor.darken(12.5%)
 
-// #let BaseDarkColorA = darken(BaseDarkColor, 62.5)
-// #let BaseDarkColorB = darken(BaseDarkColor, 37.5)
-// #let BaseDarkColorC = darken(BaseDarkColor, 25.0)
-// #let BaseDarkColorD = darken(BaseDarkColor, 12.5)
+#let BaseDarkColorA = colors.BaseDarkColor.darken(62.5%)
+#let BaseDarkColorB = colors.BaseDarkColor.darken(37.5%)
+#let BaseDarkColorC = colors.BaseDarkColor.darken(25.0%)
+#let BaseDarkColorD = colors.BaseDarkColor.darken(12.5%)

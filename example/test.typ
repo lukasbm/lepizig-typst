@@ -10,11 +10,10 @@
 
 #title-slide(title: "Test Document showing off the theme", subtitle: "in typst")
 
-#slide(title: [Slide title], new-section: [The section])[
-  hi
-]
+// #slide(title: [Slide title], new-section: [The section])[
+// ]
 
-#slide(title: [Blocks])[
+#slide(title: "Blocks")[
   #fau-block(title: "test")[
     asdasdasd
   ]
@@ -22,6 +21,10 @@
   #block()[
     asdasdasd
   ]
+]
+
+#focus-slide(title: "Focus Slide")[
+  This is a focus slide, it is a slide that is not part of the normal flow of the presentation, but can be used to focus on a specific topic.
 ]
 
 // #focus-slide(background-img: image("../assets/FAU/FAUTitle.jpg"))[

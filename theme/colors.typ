@@ -50,7 +50,12 @@
   "RW": RWAssets,
 )
 
-#let assets = state("assets").display()
+#let with-assets(callback) = {
+  locate(loc => {
+    let assets = AllAssets.at(state("institution").at(loc))
+    callback(color)
+  })
+}
 
 //////////
 // define colors and their dark versions
@@ -138,18 +143,29 @@
   "RW": RWColors,
 )
 
-#let colors = state("colors").display()
+#let with-color(callback) = {
+  locate(loc => {
+    let color = AllColors.at(state("institution").at(loc))
+    callback(color)
+  })
+}
 
 /////////////////////////
 // Define different shades for BaseColor and BaseDarkColor
 /////////////////////////
 
-#let BaseColorA = colors.at("BaseColor").darken(62.5%)
-#let BaseColorB = colors.at("BaseColor").darken(37.5%)
-#let BaseColorC = colors.at("BaseColor").darken(25.0%)
-#let BaseColorD = colors.at("BaseColor").darken(12.5%)
+// #let BaseColorA = #  {
+//   locate(loc => {
+//     let color = AllColors.at(state("institution").at(loc))
+//     color.BaseColor
+//   })
+// }
 
-#let BaseDarkColorA = colors.BaseDarkColor.darken(62.5%)
-#let BaseDarkColorB = colors.BaseDarkColor.darken(37.5%)
-#let BaseDarkColorC = colors.BaseDarkColor.darken(25.0%)
-#let BaseDarkColorD = colors.BaseDarkColor.darken(12.5%)
+// with-color(x => x.BaseColor.darken(62.5%))// #let BaseColorB = colors.at("BaseColor").darken(37.5%)
+// #let BaseColorC = colors.at("BaseColor").darken(25.0%)
+// #let BaseColorD = colors.at("BaseColor").darken(12.5%)
+
+// #let BaseDarkColorA = colors.BaseDarkColor.darken(62.5%)
+// #let BaseDarkColorB = colors.BaseDarkColor.darken(37.5%)
+// #let BaseDarkColorC = colors.BaseDarkColor.darken(25.0%)
+// #let BaseDarkColorD = colors.BaseDarkColor.darken(12.5%)

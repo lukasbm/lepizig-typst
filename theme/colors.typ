@@ -97,7 +97,7 @@
 #let FAUColors = (
   BaseColor: FAUBlue,
   BaseDarkColor: FAUDarkBlue,
-  SeparationLineColor: FAUBlue.darken(62.5%),
+  SeparationLineColor: FAUBlue.lighten(100% - 62.5%),
   TitleFont: white,
 )
 

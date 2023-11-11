@@ -27,7 +27,7 @@
   TitleSkipLeft: 5.5mm,
   LineWidthThick: 2mm,
   LineWidthThin: .5mm,
-  FootHeight: 2.5em, //9mm,
+  FootHeight: 9mm,
   FootLineSkip: 3mm,
   WordMarkHeight: 17mm,
   WordMarkWidth: 34mm,

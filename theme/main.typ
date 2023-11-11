@@ -18,12 +18,13 @@
   institution: "Tech",
   body,
 ) = {
+  let ascent = 2.5mm
   set page(paper: "presentation-" + aspect-ratio, margin: (
     left: config.SideBarWidthLeft,
-    top: config.HeaderHeight,
+    top: config.HeaderHeight + ascent,
     right: config.InnerRightMargin,
-    bottom: config.FootHeight,
-  ), header: none, footer: none, footer-descent: 0em, header-ascent: 0em)
+    bottom: config.FootHeight + ascent,
+  ), header: none, footer: none, footer-descent: ascent, header-ascent: ascent)
   // FIXME: use footer descent to give space around content
   set text(font: "FAUSans Office", size: 24pt)
   // show footnote.entry: set text(size: .6em)
@@ -98,11 +99,14 @@
   logic.polylux-slide(content)
 }
 
-#let slide(title: none, body) = {
+#let slide(title: none, subtitle: none, body) = {
   let header = locate(
     loc => {
       let col = FAUColors // color(state("institution").at(loc))
       heading(title)
+      if subtitle != none {
+        heading(subtitle)
+      }
       line(length: 200%, stroke: config.LineWidthThick + col.SeparationLineColor)
     },
   )
@@ -110,8 +114,11 @@
     loc => {
       let col = FAUColors // color(state("institution").at(loc))
       // show: block.with(width: 100%, height: auto)
-      set text(15pt)
+      // FIXME: use move or place to change position of the line?
+      show line: set block(above: 0em, below: 3mm)
       line(length: 200%, stroke: config.LineWidthThin + col.SeparationLineColor)
+      set text(11pt)
+      // set move(dy: -18mm)
       let quad = 0.7cm
       text("short institution")
       h(quad)
@@ -122,6 +129,7 @@
       text("short date")
       h(quad)
       text(logic.logical-slide.display() + [~/~] + utils.last-slide-number)
+      h(quad)
     },
   )
 

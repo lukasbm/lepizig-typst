@@ -1,26 +1,21 @@
-#let fau-block(title: none, body) = {
-  if title != none {
-    block(
-      width: 100%,
-      breakable: false,
-      fill: blue, // FIXME: use the one from the state
-      outset: 10pt, // TODO: tweak this
-      below: 20pt,
-      clip: false,
-      title,
-    )
-  }
-  // TODO: add padding?
-  block(
-    width: 100%,
-    breakable: false,
-    fill: luma(230), // FIXME: use the one from the state
-    inset: 10pt, // TODO: tweak this
-    outset: 10pt, // TODO: tweak this
-    spacing: 10pt,
-    clip: false,
-    body,
-  )
-}
+#import "colors.typ": *
+
+#let fau-block(title: none, body) = locate(
+  loc => {
+    let col = FAUColors // state("colors").at(loc)
+
+    let content = block(width: 100%, breakable: false, fill: luma(80%), inset: 5pt, body)
+
+    let header = if title != none {
+      set text(white)
+      set text(weight: "bold")
+      block(width: 100%, breakable: false, fill: col.BaseColor, inset: 5pt, title)
+    } else {
+      block(width: 100%, height: 2mm, breakable: false, fill: col.BaseColor)
+    }
+
+    stack(dir: ttb, header, content)
+  },
+)
 
 // #show block: fau-block

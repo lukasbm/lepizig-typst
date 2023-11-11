@@ -4,6 +4,7 @@
 #import "elements.typ": *
 #import "colors.typ": *
 #import "util.typ": *
+#import "fonts.typ": *
 
 ///////////////
 // Define state
@@ -18,15 +19,25 @@
   institution: "Tech",
   body,
 ) = {
+  // set up global settings
   let ascent = 2.5mm
-  set page(paper: "presentation-" + aspect-ratio, margin: (
-    left: config.SideBarWidthLeft,
-    top: config.HeaderHeight + ascent,
-    right: config.InnerRightMargin,
-    bottom: config.FootHeight + ascent,
-  ), header: none, footer: none, footer-descent: ascent, header-ascent: ascent)
-  // FIXME: use footer descent to give space around content
-  set text(font: "FAUSans Office", size: 24pt)
+
+  set page(
+    paper: "presentation-" + aspect-ratio,
+    margin: (
+      left: config.SideBarWidthLeft,
+      top: config.HeaderHeight + ascent,
+      right: config.InnerRightMargin,
+      bottom: config.FootHeight + ascent,
+    ),
+    header: none,
+    footer: none,
+    footer-descent: ascent,
+    header-ascent: ascent,
+  )
+
+  set text(font: FontFamily, size: 24pt)
+
   // show footnote.entry: set text(size: .6em)
 
   // define global state (can't define it beforehand, otherwise title slide breaks)
@@ -59,6 +70,28 @@
     set image(fit: "stretch", width: 100%, height: 100%)
     background-img
   })
+
+  let header = locate(
+    loc => {
+      let col = FAUColors // color(state("institution").at(loc))
+      let assets = FAUAssets
+
+      //  FIXME: layout/alignment by using grid or columns ...
+
+      // Kennung
+      set align(top + left)
+      assets.KennungWhite
+
+      // Logo
+      set align(top + right)
+      set image(width: config.WordMarkTitleWidth, height: config.WordMarkTitleHeight)
+      WortmarkeWhite
+
+      // line
+      show line: set block(above: 0em, below: 0mm)
+      line(length: 200%, stroke: config.LineWidthThick + col.SeparationLineColor)
+    },
+  )
 
   let content = locate(loc => {
     let colors = (a: FAUBlue, b: FAUBlue, c: FAUBlue)
@@ -96,6 +129,7 @@
     })
   })
 
+  set page(header: header)
   logic.polylux-slide(content)
 }
 
@@ -103,22 +137,39 @@
   let header = locate(
     loc => {
       let col = FAUColors // color(state("institution").at(loc))
-      heading(title)
-      if subtitle != none {
-        heading(subtitle)
+
+      // title
+      set align(top + left)
+      show text: set block(above: 0em, below: 0em)
+      if title != none {
+        text(size: TitleFontSize, weight: "bold", fill: col.BaseColor, title)
       }
+      if title != none and subtitle != none {
+        linebreak()
+        text(size: SecondFontSize, fill: col.BaseColor, subtitle)
+      }
+
+      // logo
+      set align(bottom + right)
+      set image(width: config.WordMarkWidth, height: config.WordMarkHeight)
+      WortmarkeBlue
+
+      // line
+      set align(bottom + left)
+      show line: set block(above: 0em, below: 3mm)
       line(length: 200%, stroke: config.LineWidthThick + col.SeparationLineColor)
     },
   )
   let footer = locate(
     loc => {
       let col = FAUColors // color(state("institution").at(loc))
-      // show: block.with(width: 100%, height: auto)
-      // FIXME: use move or place to change position of the line?
+
+      // line
       show line: set block(above: 0em, below: 3mm)
       line(length: 200%, stroke: config.LineWidthThin + col.SeparationLineColor)
+
+      // short texts
       set text(11pt)
-      // set move(dy: -18mm)
       let quad = 0.7cm
       text("short institution")
       h(quad)
@@ -139,3 +190,17 @@
 }
 
 #let focus-slide(title: "", body) = slide(title: title, align(center + horizon, body))
+
+// TODO:
+#let slide-plain = slide
+
+// TODO:
+#let slide-blank = slide
+
+// TODO:
+#let toc(highlight: (:)) = slide
+
+// TODO: flesh it out to get toc overview (also use toc slide)
+#show heading: it => [
+  #slide(title: it, body: none)
+]

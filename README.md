@@ -29,3 +29,9 @@
 - FAU Sans (kommerzielle Lizenz, nur für interne Zwecke)
 - FAU Sans Office (kommerzielle Lizenz, nur für interne Zwecke)
 
+## TODO
+- [ ] overwrite the heading function to instead insert a TOC slide
+- [ ] disable headings inside of slides
+- [ ] abstract the font sizes better
+- [ ] set correct baselineskip with #par.spacing (or #text)
+- [ ] 

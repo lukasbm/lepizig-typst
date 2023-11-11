@@ -1,67 +1,3 @@
-//////////
-// define assets for each institute
-//////////
-
-#let FAUAssets = (
-  Kennung: image("../assets/FAU/FAUKennung.svg"),
-  KennungWhite: image("../assets/FAU/FAUKennungWhite.svg"),
-  Title: image("../assets/FAU/FAUTitle.jpg"),
-)
-
-#let MedAssets = (
-  Kennung: image("../assets/Med/MedKennung.svg"),
-  KennungWhite: image("../assets/Med/MedKennungWhite.svg"),
-  Title: image("../assets/Med/MedTitle.jpg"),
-)
-
-#let NatAssets = (
-  Kennung: image("../assets/Nat/NatKennung.svg"),
-  KennungWhite: image("../assets/Nat/NatKennungWhite.svg"),
-  Title: image("../assets/Nat/NatTitle.jpg"),
-)
-
-#let PhilAssets = (
-  Kennung: image("../assets/Phil/PhilKennung.svg"),
-  KennungWhite: image("../assets/Phil/PhilKennungWhite.svg"),
-  Title: image("../assets/Phil/PhilTitle.jpg"),
-)
-
-#let RWAssets = (
-  Kennung: image("../assets/RW/RWKennung.svg"),
-  KennungWhite: image("../assets/RW/RWKennungWhite.svg"),
-  Title: image("../assets/RW/RWTitle.jpg"),
-)
-
-#let TechAssets = (
-  Kennung: image("../assets/Tech/TechKennung.svg"),
-  KennungWhite: image("../assets/Tech/TechKennungWhite.svg"),
-  Title: image("../assets/Tech/TechTitle.jpg"),
-)
-
-#let WortmarkeBlue = image("../assets/FAUWortmarkeBlau.svg")
-#let WortmarkeWhite = image("../assets/FAUWortmarkeWhite.svg")
-
-#let AllAssets = (
-  "FAU": FAUAssets,
-  "Tech": TechAssets,
-  "Med": MedAssets,
-  "Nat": NatAssets,
-  "Phil": PhilAssets,
-  "RW": RWAssets,
-)
-
-#let with-assets(callback) = {
-  locate(loc => {
-    let assets = AllAssets.at(state("institution").at(loc))
-    callback(color)
-  })
-}
-
-#let assets(institution) = AllAssets.at(institution)
-
-//////////
-// define colors and their dark versions
-/////////
 
 // FAU University colors
 #let FAUBlue = rgb(0, 47, 108)
@@ -87,76 +23,88 @@
 #let TechMetallic = rgb(119, 159, 181)
 #let TechDarkMetallic = rgb(65, 116, 141)
 
-////////////////////////
-// Assign the colors
-//   - BaseColor
-//  - BaseDarkColor
-// according to the specified institute.
-////////////////////////
+// Build themes:
 
-#let FAUColors = (
+#let ThemeFAU = (
+  Kennung: image("../assets/FAU/FAUKennung.svg"),
+  KennungWhite: image("../assets/FAU/FAUKennungWhite.svg"),
+  TitleBackground: image("../assets/FAU/FAUTitle.jpg"),
   BaseColor: FAUBlue,
   BaseDarkColor: FAUDarkBlue,
   SeparationLineColor: FAUBlue.lighten(100% - 62.5%),
-  TitleFont: white,
+  TitleFontColor: white,
 )
 
-#let PhilColors = (
-  BaseColor: PhilYellow,
-  BaseDarkColor: PhilOrange,
-  SeparationLineColor: PhilOrange,
-  TitleFont: black,
-)
-
-#let RWColors = (
-  BaseColor: RWRed,
-  BaseDarkColor: RWDarkRed,
-  SeparationLineColor: RWDarkRed,
-  TitleFont: white,
-)
-
-#let MedColors = (
+#let ThemeMed = (
+  Kennung: image("../assets/Med/MedKennung.svg"),
+  KennungWhite: image("../assets/Med/MedKennungWhite.svg"),
+  TitleBackground: image("../assets/Med/MedTitle.jpg"),
   BaseColor: MedBlue,
   BaseDarkColor: MedDarkBlue,
   SeparationLineColor: MedDarkBlue,
-  TitleFont: white,
+  TitleFontColor: white,
 )
 
-#let NatColors = (
+#let ThemeNat = (
+  Kennung: image("../assets/Nat/NatKennung.svg"),
+  KennungWhite: image("../assets/Nat/NatKennungWhite.svg"),
+  TitleBackground: image("../assets/Nat/NatTitle.jpg"),
   BaseColor: NatGreen,
   BaseDarkColor: NatDarkGreen,
   SeparationLineColor: NatDarkGreen,
-  TitleFont: white,
+  TitleFontColor: white,
 )
 
-#let TechColors = (
+#let ThemePhil = (
+  Kennung: image("../assets/Phil/PhilKennung.svg"),
+  KennungWhite: image("../assets/Phil/PhilKennungWhite.svg"),
+  TitleBackground: image("../assets/Phil/PhilTitle.jpg"),
+  BaseColor: PhilYellow,
+  BaseDarkColor: PhilOrange,
+  SeparationLineColor: PhilOrange,
+  TitleFontColor: black,
+)
+
+#let ThemeRW = (
+  Kennung: image("../assets/RW/RWKennung.svg"),
+  KennungWhite: image("../assets/RW/RWKennungWhite.svg"),
+  TitleBackground: image("../assets/RW/RWTitle.jpg"),
+  BaseColor: RWRed,
+  BaseDarkColor: RWDarkRed,
+  SeparationLineColor: RWDarkRed,
+  TitleFontColor: white,
+)
+
+#let ThemeTech = (
+  Kennung: image("../assets/Tech/TechKennung.svg"),
+  KennungWhite: image("../assets/Tech/TechKennungWhite.svg"),
+  TitleBackground: image("../assets/Tech/TechTitle.jpg"),
   BaseColor: TechMetallic,
   BaseDarkColor: TechDarkMetallic,
   SeparationLineColor: TechDarkMetallic,
-  TitleFont: white,
+  TitleFontColor: white,
 )
 
-#let AllColors = (
-  "FAU": FAUColors,
-  "Tech": TechColors,
-  "Med": MedColors,
-  "Nat": NatColors,
-  "Phil": PhilColors,
-  "RW": RWColors,
+#let WortmarkeBlue = image("../assets/FAUWortmarkeBlau.svg")
+#let WortmarkeWhite = image("../assets/FAUWortmarkeWhite.svg")
+
+#let AllThemes = (
+  "FAU": ThemeFAU,
+  "Tech": ThemeTech,
+  "Med": ThemeMed,
+  "Nat": ThemeNat,
+  "Phil": ThemePhil,
+  "RW": ThemeRW,
 )
 
-#let with-color(callback) = {
+#let with-theme(callback) = {
   locate(loc => {
-    let color = AllColors.at(state("institution").at(loc))
-    callback(color)
+    let theme = AllThemes.at(state("institution").final(loc))
+    callback(theme)
   })
 }
 
-#let color(institution) = AllColors.at(institution)
-
-/////////////////////////
 // Define different shades for BaseColor and BaseDarkColor
-/////////////////////////
 
 // #let BaseColorA = #  {
 //   locate(loc => {

@@ -57,6 +57,8 @@
   })
 }
 
+#let assets(institution) = AllAssets.at(institution)
+
 //////////
 // define colors and their dark versions
 /////////
@@ -149,6 +151,8 @@
     callback(color)
   })
 }
+
+#let color(institution) = AllColors.at(institution)
 
 /////////////////////////
 // Define different shades for BaseColor and BaseDarkColor

@@ -18,12 +18,13 @@
   institution: "Tech",
   body,
 ) = {
-  set page(
-    paper: "presentation-" + aspect-ratio,
-    margin: 0em,
-    header: none,
-    footer: none,
-  )
+  set page(paper: "presentation-" + aspect-ratio, margin: (
+    left: config.SideBarWidthLeft,
+    top: config.HeaderHeight,
+    right: config.InnerRightMargin,
+    bottom: config.FootHeight,
+  ), header: none, footer: none, footer-descent: 0em, header-ascent: 0em)
+  // FIXME: use footer descent to give space around content
   set text(font: "FAUSans Office", size: 24pt)
   // show footnote.entry: set text(size: .6em)
 
@@ -56,7 +57,7 @@
   set page(background: {
     set image(fit: "stretch", width: 100%, height: 100%)
     background-img
-  }, margin: 1em)
+  })
 
   let content = locate(loc => {
     let colors = (a: FAUBlue, b: FAUBlue, c: FAUBlue)
@@ -98,20 +99,33 @@
 }
 
 #let slide(title: none, body) = {
-  let header = locate(loc => {
-    heading(title)
-    line(length: 100%, stroke: 2mm + FAUBlue)
-  })
-  let footer = locate(loc => {
-    text("fill")
-  })
-
-  set page(
-    header: header,
-    footer: footer,
-    footer-descent: -2em,
-    header-ascent: -2em,
+  let header = locate(
+    loc => {
+      let col = FAUColors // color(state("institution").at(loc))
+      heading(title)
+      line(length: 200%, stroke: config.LineWidthThick + col.SeparationLineColor)
+    },
   )
+  let footer = locate(
+    loc => {
+      let col = FAUColors // color(state("institution").at(loc))
+      // show: block.with(width: 100%, height: auto)
+      set text(15pt)
+      line(length: 200%, stroke: config.LineWidthThin + col.SeparationLineColor)
+      let quad = 0.7cm
+      text("short institution")
+      h(quad)
+      text("short author")
+      h(quad)
+      text(col.BaseColor)["short title"]
+      h(1fr)
+      text("short date")
+      h(quad)
+      text(logic.logical-slide.display() + [~/~] + utils.last-slide-number)
+    },
+  )
+
+  set page(header: header, footer: footer)
 
   logic.polylux-slide(body)
 }

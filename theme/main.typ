@@ -10,6 +10,8 @@
 // Define state
 ///////////////
 
+#let ascent = 2mm
+
 // sets up state
 #let fau-theme(
   aspect-ratio: "16-9",
@@ -20,25 +22,9 @@
   body,
 ) = {
   // set up global settings
-  let ascent = 2.5mm
+  set page(paper: "presentation-" + aspect-ratio)
 
-  set page(
-    paper: "presentation-" + aspect-ratio,
-    margin: (
-      left: config.SideBarWidthLeft,
-      top: config.HeaderHeight + ascent,
-      right: config.InnerRightMargin,
-      bottom: config.FootHeight + ascent,
-    ),
-    header: none,
-    footer: none,
-    footer-descent: ascent,
-    header-ascent: ascent,
-  )
-
-  set text(font: FontFamily, size: 24pt)
-
-  // show footnote.entry: set text(size: .6em)
+  set text(font: FontFamily, size: TextFontSize)
 
   // define global state (can't define it beforehand, otherwise title slide breaks)
   let _ = state("short-title", short-title)
@@ -55,6 +41,36 @@
 // slides
 /////////////////
 
+#let title-header = locate(
+  loc => {
+    let col = FAUColors // color(state("institution").at(loc))
+    let assets = FAUAssets
+
+    //  FIXME: layout/alignment by using grid or columns ...
+
+    grid(
+      columns: (auto, 1fr, auto),
+      rows: (auto),
+      align(left)[
+        // Kennung
+        #set image(height: 2cm)
+        #assets.KennungWhite
+      ],
+      align(
+        right,
+      )[
+        // Logo
+        #set image(width: config.WordMarkTitleWidth, height: config.WordMarkTitleHeight)
+        #WortmarkeWhite
+      ],
+    )
+
+    // line
+    show line: set block(above: 0em, below: 0mm)
+    line(length: 200%, stroke: config.LineWidthThick + col.SeparationLineColor)
+  },
+)
+
 #let title-slide(
   title: "Title",
   subtitle: "Subtitle",
@@ -65,140 +81,167 @@
   let background-color = FAUBlue
   let background-img = FAUAssets.Title
 
-  set text(fill: white, font: "FAUSans Office", size: 20pt)
   set page(background: {
     set image(fit: "stretch", width: 100%, height: 100%)
     background-img
   })
 
-  let header = locate(
+  let content = locate(
     loc => {
       let col = FAUColors // color(state("institution").at(loc))
-      let assets = FAUAssets
 
-      //  FIXME: layout/alignment by using grid or columns ...
+      // show footnote.entry: set text(size: .6em)
 
-      // Kennung
-      set align(top + left)
-      assets.KennungWhite
+      set text(fill: col.TitleFont)
 
-      // Logo
-      set align(top + right)
-      set image(width: config.WordMarkTitleWidth, height: config.WordMarkTitleHeight)
-      WortmarkeWhite
+      // title
+      text(size: TitleFontSize, weight: "bold", title)
 
-      // line
-      show line: set block(above: 0em, below: 0mm)
-      line(length: 200%, stroke: config.LineWidthThick + col.SeparationLineColor)
+      // subtitle
+      linebreak()
+      text(size: SecondFontSize, subtitle)
+
+      // authors
+      stack(
+        dir: ltr,
+        spacing: 1cm,
+        ..authors.map(author => text(weight: "bold", size: TextFontSize, author)),
+      )
+
+      // author associations
+      // TODO:
+
+      // date
+      text(size: TextFontSize, date.display("[month repr:long] [day], [year]"))
+      // set text(size: .8em, fill: col.TitleFont)
+      // grid(
+      //   columns: (5cm,) * calc.min(authors.len(), 3),
+      //   column-gutter: 1em,
+      //   row-gutter: 1em,
+      //   ..authors.map(author => text(author)),
+      // )
     },
   )
 
-  let content = locate(loc => {
-    let colors = (a: FAUBlue, b: FAUBlue, c: FAUBlue)
-
-    // let logo = WortmarkeBlue
-    // if logo != none {
-    //   align(right, logo)
-    // }
-
-    align(center + horizon, {
-      block(inset: 0em, breakable: false, {
-        text(size: 2em, fill: colors.a, strong(title))
-        if subtitle != none {
-          parbreak()
-          text(size: 1.2em, fill: colors.a, subtitle)
-        }
-      })
-      set text(size: .8em)
-      grid(
-        columns: (1fr,) * calc.min(authors.len(), 3),
-        column-gutter: 1em,
-        row-gutter: 1em,
-        ..authors.map(author => text(fill: black, author)),
-      )
-      v(1em)
-      let institution-name = "test"
-      if institution-name != none {
-        parbreak()
-        text(size: .9em, institution-name)
-      }
-      if date != none {
-        parbreak()
-        date.display()
-      }
-    })
-  })
-
-  set page(header: header)
+  set page(
+    margin: (
+      left: config.SideBarWidthLeft,
+      top: config.HeaderHeight + ascent,
+      right: config.InnerRightMargin,
+      bottom: config.FootHeight + ascent,
+    ),
+    header: title-header,
+    footer: none,
+    footer-descent: ascent,
+    header-ascent: ascent * 2,
+  )
   logic.polylux-slide(content)
 }
 
+#let header(title: none, subtitle: none) = locate(
+  loc => {
+    let col = FAUColors // color(state("institution").at(loc))
+
+    grid(
+      columns: (auto, 1fr, auto),
+      row-gutter: 0pt,
+      column-gutter: 1em,
+      align(left)[
+        // title + subtitle
+        #set align(top + left)
+        #show text: set block(above: 0em, below: 0em)
+        #if title != none {
+          text(size: TitleFontSize, weight: "bold", fill: col.BaseColor, title)
+        }
+        #if title != none and subtitle != none {
+          linebreak()
+          text(size: SecondFontSize, fill: col.BaseColor, subtitle)
+        }
+      ],
+      [],
+      align(right)[
+        // Logo
+        #set image(width: config.WordMarkWidth, height: config.WordMarkHeight)
+        #WortmarkeBlue
+      ],
+    )
+
+    // line
+    show line: set block(above: 0em, below: 0mm)
+    line(length: 200%, stroke: config.LineWidthThick + col.SeparationLineColor)
+  },
+)
+
+#let footer = locate(
+  loc => {
+    let col = FAUColors // color(state("institution").at(loc))
+
+    // line
+    show line: set block(above: 0em, below: 3mm)
+    line(length: 200%, stroke: config.LineWidthThin + col.SeparationLineColor)
+
+    // short texts
+    set text(FooterFontSize)
+    let quad = 0.7cm;
+    text("short institution");
+    h(quad);
+    text("short author");
+    h(quad);
+    text(col.BaseColor)["short title"];
+    h(1fr);
+    text("short date");
+    h(quad);
+    text(logic.logical-slide.display() + [~/~] + utils.last-slide-number);
+    h(quad);
+  },
+)
+
 #let slide(title: none, subtitle: none, body) = {
-  let header = locate(
-    loc => {
-      let col = FAUColors // color(state("institution").at(loc))
-
-      // title
-      set align(top + left)
-      show text: set block(above: 0em, below: 0em)
-      if title != none {
-        text(size: TitleFontSize, weight: "bold", fill: col.BaseColor, title)
-      }
-      if title != none and subtitle != none {
-        linebreak()
-        text(size: SecondFontSize, fill: col.BaseColor, subtitle)
-      }
-
-      // logo
-      set align(bottom + right)
-      set image(width: config.WordMarkWidth, height: config.WordMarkHeight)
-      WortmarkeBlue
-
-      // line
-      set align(bottom + left)
-      show line: set block(above: 0em, below: 3mm)
-      line(length: 200%, stroke: config.LineWidthThick + col.SeparationLineColor)
-    },
+  set page(
+    margin: (
+      left: config.SideBarWidthLeft,
+      top: config.HeaderHeight + ascent,
+      right: config.InnerRightMargin,
+      bottom: config.FootHeight + ascent,
+    ),
+    header: header(title: title, subtitle: subtitle),
+    footer: footer,
+    footer-descent: ascent,
+    header-ascent: ascent * 2,
   )
-  let footer = locate(
-    loc => {
-      let col = FAUColors // color(state("institution").at(loc))
-
-      // line
-      show line: set block(above: 0em, below: 3mm)
-      line(length: 200%, stroke: config.LineWidthThin + col.SeparationLineColor)
-
-      // short texts
-      set text(11pt)
-      let quad = 0.7cm
-      text("short institution")
-      h(quad)
-      text("short author")
-      h(quad)
-      text(col.BaseColor)["short title"]
-      h(1fr)
-      text("short date")
-      h(quad)
-      text(logic.logical-slide.display() + [~/~] + utils.last-slide-number)
-      h(quad)
-    },
-  )
-
-  set page(header: header, footer: footer)
-
   logic.polylux-slide(body)
 }
 
 #let focus-slide(title: "", body) = slide(title: title, align(center + horizon, body))
 
-// TODO:
-#let slide-plain = slide
+#let slide-plain(body) = {
+  set page(
+    margin: (top: ascent * 2, right: config.InnerRightMargin, bottom: config.FootHeight + ascent),
+    header: none,
+    footer: footer,
+  )
+  logic.polylux-slide(body)
+}
 
-// TODO:
-#let slide-blank = slide
+#let slide-fullscreen(body) = {
+  set page(margin: 0em, header: none, footer: none)
+  logic.polylux-slide(body)
+}
 
-// TODO:
-#let toc(highlight: (:)) = slide
+#let toc(highlight: (:)) = {
+  set page(margin: (
+    left: config.SideBarWidthLeft,
+    top: config.HeaderHeight + ascent,
+    right: config.InnerRightMargin,
+    bottom: config.FootHeight + ascent,
+  ), header: none, footer: none, header-ascent: ascent * 2)
+  let content = text("filler")
+  logic.polylux-slide(content)
+}
+
+#let references = slide(title: "References")[
+  TODO: print bibliography
+]
 
 // TODO: flesh it out to get toc overview (also use toc slide)
 #show heading: it => [

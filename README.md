@@ -34,4 +34,4 @@
 - [ ] disable headings inside of slides
 - [ ] abstract the font sizes better
 - [ ] set correct baselineskip with #par.spacing (or #text)
-- [ ] 
+- [ ] fix the bug where empty slides (with title) are not displayed

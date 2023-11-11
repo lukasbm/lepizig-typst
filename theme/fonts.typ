@@ -1,8 +1,9 @@
 #let TitleFontSize = 30pt
-#let SecondFontSize = 20pt
-#let FooterFontSize = 11pt
+#let SecondFontSize = 25pt
+#let FooterFontSize = 10pt
 #let TextBaseLineSkip = 0.65em
 #let TextFontSize = 20pt
+#let SmallFontSize = 16pt
 
 #let FontFamily = "FAUSans Office"
 

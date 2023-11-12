@@ -6,15 +6,31 @@
   short-title: "Test Document",
   short-date: datetime.today(),
   short-organization: "Lab1",
-  institution: "Tech",
+  institution: "FAU",
 )
 
 #polylux-slide[need this empty slide due to a bug with state updates]
 
-#title-slide(title: "Test Document showing off the theme", subtitle: "in typst")
+#title-slide(
+  theme: ThemeFAU, // FIXME: this should not be needed
+  title: "Test Document showing off the theme",
+  subtitle: "in typst",
+)
 
 #slide(title: "Introduction", subtitle: "What is this?")[
   This file demonstrates the usage of the FAU theme for typst.
+]
+
+#slide(title: "Side by Side", subtitle: "Organizing content on the slide")[
+  #align(horizon + center)[
+    #side-by-side[
+      #lorem(7)
+    ][
+      #lorem(10)
+    ][
+      #lorem(5)
+    ]
+  ]
 ]
 
 = Example Section
@@ -48,12 +64,19 @@
 
   - This is a list
   - with items
+    - and inner items
+    - and more inner items
 
   + This is an enumerate
   + with some more items
 
   / Terms: A terms environment.
   / Keyword: With some fancy words.
+
+  ```
+  this is some code
+  ```
+  Or also `inline` code.
 ]
 
 #slide(
@@ -94,11 +117,12 @@
 #slide(title: "Normal Slide", subtitle: "With normal dimensions")[
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
-      This is the area you can fill on a normal slide created with: ```typst
-                                            #slide(title: "Title")[
-                                              content
-                                            ]
-                                          ```
+      This is the area you can fill on a normal slide created with:
+      ```typst
+        #slide(title: "Title")[
+          content
+        ]
+      ```
     ]
   ]
 ]

@@ -99,7 +99,9 @@
 
 #let with-theme(callback) = {
   locate(loc => {
-    let theme = AllThemes.at(state("institution").final(loc))
+    let institution = state("institution").final(loc)
+    assert(institution != none)
+    let theme = AllThemes.at(institution)
     callback(theme)
   })
 }

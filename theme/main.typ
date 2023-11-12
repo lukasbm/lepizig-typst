@@ -4,35 +4,6 @@
 #import "util.typ": *
 #import "fonts.typ": *
 
-///////////////
-// Setup
-///////////////
-
-#let fau-theme(
-  aspect-ratio: "16-9",
-  short-title: none,
-  short-author: none,
-  short-date: none,
-  short-organization: none,
-  institution: "FAU",
-  body,
-) = {
-  // set up global settings
-  set page(paper: "presentation-" + aspect-ratio)
-
-  set text(font: FontFamily, size: TextFontSize)
-
-  // define global state (can't define it beforehand, otherwise title slide breaks)
-  state-short-title.update(short-title)
-  state-short-author.update(short-author)
-  state-short-date.update(short-date)
-  state-short-organization.update(short-organization)
-  state-institution.update(institution)
-  state-theme.update(AllThemes.at(institution))
-
-  body
-}
-
 /////////////////
 // components
 /////////////////
@@ -150,53 +121,49 @@
 /////////////////////
 
 #let title-slide(
+  theme: ThemeFAU,
   title: "Title",
   subtitle: "Subtitle",
   authors: ("author1", "author 2"),
   institution: "FAU",
   date: datetime.today(),
 ) = {
-  let background-color = FAUBlue
-  let background-img = ThemeFAU.TitleBackground
-
   set page(background: {
     set image(fit: "stretch", width: 100%, height: 100%)
-    background-img
+    theme.TitleBackground
   })
 
-  let content = with-theme(
-    theme => {
-      // show footnote.entry: set text(size: .6em)
-      set text(fill: theme.TitleFontColor)
+  let content = {
+    // show footnote.entry: set text(size: .6em)
+    set text(fill: theme.TitleFontColor)
 
-      // title
-      text(size: TitleFontSize, weight: "bold", title)
+    // title
+    text(size: TitleFontSize, weight: "bold", title)
 
-      // subtitle
-      linebreak()
-      text(size: SecondFontSize, subtitle)
+    // subtitle
+    linebreak()
+    text(size: SecondFontSize, subtitle)
 
-      // authors
-      stack(
-        dir: ltr,
-        spacing: 1cm,
-        ..authors.map(author => text(weight: "bold", size: TextFontSize, author)),
-      )
+    // authors
+    stack(
+      dir: ltr,
+      spacing: 1cm,
+      ..authors.map(author => text(weight: "bold", size: TextFontSize, author)),
+    )
 
-      // author associations
-      // TODO:
+    // author associations
+    // TODO:
 
-      // date
-      text(size: TextFontSize, date.display("[month repr:long] [day], [year]"))
-      // set text(size: .8em, fill: col.TitleFont)
-      // grid(
-      //   columns: (5cm,) * calc.min(authors.len(), 3),
-      //   column-gutter: 1em,
-      //   row-gutter: 1em,
-      //   ..authors.map(author => text(author)),
-      // )
-    },
-  )
+    // date
+    text(size: TextFontSize, date.display("[month repr:long] [day], [year]"))
+    // set text(size: .8em, fill: col.TitleFont)
+    // grid(
+    //   columns: (5cm,) * calc.min(authors.len(), 3),
+    //   column-gutter: 1em,
+    //   row-gutter: 1em,
+    //   ..authors.map(author => text(author)),
+    // )
+  }
 
   set page(
     margin: (
@@ -210,6 +177,7 @@
     footer-descent: ascent,
     header-ascent: ascent * 2,
   )
+
   logic.polylux-slide(content)
 }
 
@@ -246,7 +214,7 @@
 }
 
 // FIXME: use polylux outline
-#let toc(highlight: (:)) = {
+#let toc() = {
   set page(margin: (
     left: config.SideBarWidthLeft,
     top: config.HeaderHeight + ascent,
@@ -261,12 +229,39 @@
   TODO: print bibliography
 ]
 
-////////////////////////
-// apply slides
-//////////////////////
+///////////////
+// Setup
+///////////////
 
-// TODO: flesh it out to get toc overview (also use toc slide)
-#show heading: it => [
-  // util.register-section?
-  #slide(title: it, body: none)
-]
+#let fau-theme(
+  aspect-ratio: "16-9",
+  short-title: none,
+  short-author: none,
+  short-date: none,
+  short-organization: none,
+  institution: "FAU",
+  body,
+) = {
+  set page(paper: "presentation-" + aspect-ratio)
+  set text(font: FontFamily, size: TextFontSize)
+
+  show heading: it => {
+    text(fill: green, it)
+    utils.register-section(it)
+    slide(title: it)[
+      #text("hey there")
+      #text(utils.polylux-outline())
+    ]
+  }
+
+  // TODO: update lists and terms and enumerations
+
+  state-short-title.update(short-title)
+  state-short-author.update(short-author)
+  state-short-date.update(short-date)
+  state-short-organization.update(short-organization)
+  state-institution.update(institution)
+  state-theme.update(AllThemes.at(institution))
+
+  body
+}

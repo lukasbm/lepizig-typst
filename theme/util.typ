@@ -1,3 +1,15 @@
+#import "colors.typ": ThemeFAU
+
+//////////////////////
+// state stuff
+//////////////////////
+
+#let state-short-title = state("short-title", none)
+#let state-short-author = state("short-author", none)
+#let state-short-date = state("short-date", datetime.today())
+#let state-short-organization = state("short-organization", none)
+#let state-institution = state("institution", "FAU")
+#let state-theme = state("theme", ThemeFAU)
 
 #let state-to-string(content) = {
   if content.has("text") {
@@ -10,6 +22,10 @@
     " "
   }
 }
+
+//////////////////////
+// config
+//////////////////////
 
 #let ascent = 2mm
 

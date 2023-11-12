@@ -1,24 +1,20 @@
-#import "@preview/polylux:0.3.1": logic
-#import "@preview/polylux:0.3.1": utils
+#import "@preview/polylux:0.3.1": logic, utils
 
-#import "elements.typ": *
 #import "colors.typ": *
 #import "util.typ": *
 #import "fonts.typ": *
 
 ///////////////
-// Define state
+// Setup
 ///////////////
 
-#let ascent = 2mm
-
-// sets up state
 #let fau-theme(
   aspect-ratio: "16-9",
   short-title: none,
   short-author: none,
   short-date: none,
-  institution: "Tech",
+  short-organization: none,
+  institution: "FAU",
   body,
 ) = {
   // set up global settings
@@ -27,34 +23,52 @@
   set text(font: FontFamily, size: TextFontSize)
 
   // define global state (can't define it beforehand, otherwise title slide breaks)
-  let _ = state("short-title", short-title)
-  let _ = state("short-author", short-author)
-  let _ = state("short-date", short-date)
-  let _ = state("assets", AllAssets.at(institution))
-  let _ = state("color", AllColors.at(institution))
-  let _ = state("institution", institution)
+  state-short-title.update(short-title)
+  state-short-author.update(short-author)
+  state-short-date.update(short-date)
+  state-short-organization.update(short-organization)
+  state-institution.update(institution)
+  state-theme.update(AllThemes.at(institution))
 
   body
 }
 
 /////////////////
-// slides
+// components
 /////////////////
 
-#let title-header = locate(
-  loc => {
-    let col = FAUColors // color(state("institution").at(loc))
-    let assets = FAUAssets
+#let fau-block(title: none, body) = with-theme(
+  theme => {
+    let content = block(width: 100%, breakable: false, fill: luma(80%), inset: 5pt, body)
 
+    let header = if title != none {
+      set text(white)
+      set text(weight: "bold")
+      block(
+        width: 100%,
+        breakable: false,
+        fill: theme.BaseColor,
+        inset: 5pt,
+        title,
+      )
+    } else {
+      block(width: 100%, height: 2mm, breakable: false, fill: theme.BaseColor)
+    }
+
+    stack(dir: ttb, header, content)
+  },
+)
+
+#let title-header = with-theme(
+  theme => {
     //  FIXME: layout/alignment by using grid or columns ...
-
     grid(
       columns: (auto, 1fr, auto),
       rows: (auto),
       align(left)[
         // Kennung
         #set image(height: 2cm)
-        #assets.KennungWhite
+        #theme.KennungWhite
       ],
       align(
         right,
@@ -67,9 +81,73 @@
 
     // line
     show line: set block(above: 0em, below: 0mm)
-    line(length: 200%, stroke: config.LineWidthThick + col.SeparationLineColor)
+    line(
+      length: 200%,
+      stroke: config.LineWidthThick + theme.SeparationLineColor,
+    )
   },
 )
+
+#let header(title: none, subtitle: none) = with-theme(theme => {
+  grid(
+    columns: (auto, 1fr, auto),
+    row-gutter: 0pt,
+    column-gutter: 1em,
+    align(left)[
+      // title + subtitle
+      #set align(top + left)
+      #show text: set block(above: 0em, below: 0em)
+      #if title != none {
+        text(size: TitleFontSize, weight: "bold", fill: theme.BaseColor, title)
+      }
+      #if title != none and subtitle != none {
+        linebreak()
+        text(size: SecondFontSize, fill: theme.BaseColor, subtitle)
+      }
+    ],
+    [],
+    align(right)[
+      // Logo
+      #set image(width: config.WordMarkWidth, height: config.WordMarkHeight)
+      #WortmarkeBlue
+    ],
+  )
+
+  // line
+  show line: set block(above: 0em, below: 0mm)
+  line(
+    length: 200%,
+    stroke: config.LineWidthThick + theme.SeparationLineColor,
+  )
+})
+
+#let footer = with-theme(
+  theme => {
+    // line
+    show line: set block(above: 0em, below: 3mm)
+    line(length: 200%, stroke: config.LineWidthThin + theme.SeparationLineColor)
+
+    // short texts
+    set text(FooterFontSize)
+    let quad = 0.7cm;
+    text(state-short-organization.display());
+    h(quad);
+    text(state-short-author.display());
+    h(quad);
+    text(fill: theme.BaseColor, state-short-title.display());
+    h(1fr);
+    text(
+      state-short-date.display(dat => dat.display("[month repr:short] [day], [year]")),
+    );
+    h(quad);
+    text(logic.logical-slide.display() + [~/~] + utils.last-slide-number);
+    h(quad);
+  },
+)
+
+/////////////////////
+// slides
+/////////////////////
 
 #let title-slide(
   title: "Title",
@@ -79,20 +157,17 @@
   date: datetime.today(),
 ) = {
   let background-color = FAUBlue
-  let background-img = FAUAssets.Title
+  let background-img = ThemeFAU.TitleBackground
 
   set page(background: {
     set image(fit: "stretch", width: 100%, height: 100%)
     background-img
   })
 
-  let content = locate(
-    loc => {
-      let col = FAUColors // color(state("institution").at(loc))
-
+  let content = with-theme(
+    theme => {
       // show footnote.entry: set text(size: .6em)
-
-      set text(fill: col.TitleFont)
+      set text(fill: theme.TitleFontColor)
 
       // title
       text(size: TitleFontSize, weight: "bold", title)
@@ -138,64 +213,6 @@
   logic.polylux-slide(content)
 }
 
-#let header(title: none, subtitle: none) = locate(
-  loc => {
-    let col = FAUColors // color(state("institution").at(loc))
-
-    grid(
-      columns: (auto, 1fr, auto),
-      row-gutter: 0pt,
-      column-gutter: 1em,
-      align(left)[
-        // title + subtitle
-        #set align(top + left)
-        #show text: set block(above: 0em, below: 0em)
-        #if title != none {
-          text(size: TitleFontSize, weight: "bold", fill: col.BaseColor, title)
-        }
-        #if title != none and subtitle != none {
-          linebreak()
-          text(size: SecondFontSize, fill: col.BaseColor, subtitle)
-        }
-      ],
-      [],
-      align(right)[
-        // Logo
-        #set image(width: config.WordMarkWidth, height: config.WordMarkHeight)
-        #WortmarkeBlue
-      ],
-    )
-
-    // line
-    show line: set block(above: 0em, below: 0mm)
-    line(length: 200%, stroke: config.LineWidthThick + col.SeparationLineColor)
-  },
-)
-
-#let footer = locate(
-  loc => {
-    let col = FAUColors // color(state("institution").at(loc))
-
-    // line
-    show line: set block(above: 0em, below: 3mm)
-    line(length: 200%, stroke: config.LineWidthThin + col.SeparationLineColor)
-
-    // short texts
-    set text(FooterFontSize)
-    let quad = 0.7cm;
-    text("short institution");
-    h(quad);
-    text("short author");
-    h(quad);
-    text(col.BaseColor)["short title"];
-    h(1fr);
-    text("short date");
-    h(quad);
-    text(logic.logical-slide.display() + [~/~] + utils.last-slide-number);
-    h(quad);
-  },
-)
-
 #let slide(title: none, subtitle: none, body) = {
   set page(
     margin: (
@@ -215,11 +232,11 @@
 #let focus-slide(title: "", body) = slide(title: title, align(center + horizon, body))
 
 #let slide-plain(body) = {
-  set page(
-    margin: (top: ascent * 2, right: config.InnerRightMargin, bottom: config.FootHeight + ascent),
-    header: none,
-    footer: footer,
-  )
+  set page(margin: (
+    top: ascent * 2,
+    right: config.InnerRightMargin,
+    bottom: config.FootHeight + ascent,
+  ), header: none, footer: footer)
   logic.polylux-slide(body)
 }
 
@@ -228,6 +245,7 @@
   logic.polylux-slide(body)
 }
 
+// FIXME: use polylux outline
 #let toc(highlight: (:)) = {
   set page(margin: (
     left: config.SideBarWidthLeft,
@@ -243,7 +261,12 @@
   TODO: print bibliography
 ]
 
+////////////////////////
+// apply slides
+//////////////////////
+
 // TODO: flesh it out to get toc overview (also use toc slide)
 #show heading: it => [
+  // util.register-section?
   #slide(title: it, body: none)
 ]

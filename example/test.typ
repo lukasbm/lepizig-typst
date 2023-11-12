@@ -5,8 +5,11 @@
   short-author: "Lukas Böhm",
   short-title: "Test Document",
   short-date: datetime.today(),
+  short-organization: "Lab1",
   institution: "Tech",
 )
+
+#polylux-slide[need this empty slide due to a bug with state updates]
 
 #title-slide(title: "Test Document showing off the theme", subtitle: "in typst")
 

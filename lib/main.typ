@@ -8,6 +8,9 @@
 // components
 /////////////////
 
+// FIXME: the combinatation of set-page(header, etc...) breaks the following slide!!!
+// TODO: extract page setup into functions
+
 #let fau-block(title: none, body) = with-theme(
   theme => {
     let content = block(width: 100%, breakable: false, fill: luma(80%), inset: 5pt, body)
@@ -120,71 +123,78 @@
 /////////////////////
 
 #let title-slide(
-  theme: ThemeFAU,
   title: "Title",
   subtitle: none,
   authors: (),
   institution: "FAU",
   date: datetime.today(),
 ) = {
-  logic.polylux-slide(text("need this empty slide due to a bug with state updates"))
+  logic.polylux-slide[
+    need this empty slide at the beginngin due to a bug with state updates
 
-  // needs to be here because of: https://github.com/typst/typst/issues/1467#issuecomment-1588684304
-  show footnote.entry: set text(fill: theme.TitleFontColor)
-  show footnote: set text(fill: theme.TitleFontColor)
+    Issue will be resolved _hopefully_ soon.
+  ]
 
-  let content = {
-    v(1.5cm)
+  with-theme(
+    theme => {
+      // needs to be here because of: https://github.com/typst/typst/issues/1467#issuecomment-1588684304
+      show footnote.entry: set text(fill: theme.TitleFontColor)
+      show footnote: set text(fill: theme.TitleFontColor)
 
-    set text(fill: theme.TitleFontColor)
+      let content = {
+        v(1.5cm)
 
-    // title
-    text(size: TitleFontSize, weight: "bold", title)
+        set text(fill: theme.TitleFontColor)
 
-    // subtitle
-    if subtitle != none {
-      linebreak()
-      text(size: SecondFontSize, subtitle)
-    }
+        // title
+        text(size: TitleFontSize, weight: "bold", title)
 
-    v(0.5cm)
+        // subtitle
+        if subtitle != none {
+          linebreak()
+          text(size: SecondFontSize, subtitle)
+        }
 
-    // authors
-    // FIXME: this can overflow horizontally
-    stack(dir: ltr, spacing: 1cm, ..authors.map(author =>{
-      assert("name" in author)
-      text(weight: "bold", size: TextFontSize, if "email" in author {
-        link("mailto:" + author.email, author.name)
-      } else {
-        author.name
-      })
-      if "affiliation" in author {
-        footnote(author.affiliation)
+        v(0.5cm)
+
+        // authors
+        // FIXME: this can overflow horizontally
+        stack(dir: ltr, spacing: 1cm, ..authors.map(author =>{
+          assert("name" in author)
+          text(weight: "bold", size: TextFontSize, if "email" in author {
+            link("mailto:" + author.email, author.name)
+          } else {
+            author.name
+          })
+          if "affiliation" in author {
+            footnote(author.affiliation)
+          }
+        }))
+
+        // date
+        text(size: TextFontSize, date.display("[month repr:long] [day], [year]"))
       }
-    }))
 
-    // date
-    text(size: TextFontSize, date.display("[month repr:long] [day], [year]"))
-  }
+      set page(
+        background: {
+          set image(fit: "stretch", width: 100%, height: 100%)
+          theme.TitleBackground
+        },
+        margin: (
+          left: config.SideBarWidthLeft,
+          top: config.HeaderHeight + ascent,
+          right: config.InnerRightMargin,
+          bottom: config.FootHeight + ascent,
+        ),
+        header: title-header,
+        footer: none,
+        footer-descent: ascent,
+        header-ascent: ascent * 2,
+      )
 
-  set page(
-    background: {
-      set image(fit: "stretch", width: 100%, height: 100%)
-      theme.TitleBackground
+      logic.polylux-slide(content)
     },
-    margin: (
-      left: config.SideBarWidthLeft,
-      top: config.HeaderHeight + ascent,
-      right: config.InnerRightMargin,
-      bottom: config.FootHeight + ascent,
-    ),
-    header: title-header,
-    footer: none,
-    footer-descent: ascent,
-    header-ascent: ascent * 2,
   )
-
-  logic.polylux-slide(content)
 }
 
 #let slide(title: none, subtitle: none, body) = {
@@ -228,11 +238,32 @@
 #let section-slide(title) = {
   utils.register-section(title)
 
-  slide(title: title)[
-    #utils.sections-state.display(secs => secs.map(x => x.body))
-    and
-    #utils.current-section
-  ]
+  locate(
+    loc => {
+      // let theme = state-theme.final(loc)
+      // set page(fill: theme.BaseColor)
+      // set text(size: TitleFontSize, weight: "bold", fill: theme.TitleFontColor)
+      let secs = utils.sections-state.final(loc).map(x => x.body)
+      let current-sec = utils.current-section
+
+      // show rule to highligh current section (maybe have to use regex)
+      // show current-sec: set text(fill: red)
+
+      // renders the a sections (highlighted if current-section)
+      let section-entry(sec) = {
+        if sec == current-sec {
+          set text(fill: red)
+        }
+        [ + #sec ]
+      }
+
+      slide(title: title)[
+        #for sec in secs {
+          section-entry(sec)
+        }
+      ]
+    },
+  )
 }
 
 // old slide: REMOVE!!!

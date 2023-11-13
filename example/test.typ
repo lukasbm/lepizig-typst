@@ -6,11 +6,10 @@
   short-title: "Test Document",
   short-date: datetime.today(),
   short-organization: "Lab1",
-  institution: "FAU",
+  institution: "Nat",
 )
 
 #title-slide(
-  theme: ThemeFAU, // FIXME: this should not be needed
   title: "Test Document showing off the theme",
   subtitle: "in Typst, the new Markup Language",
   authors: (

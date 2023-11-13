@@ -13,8 +13,7 @@
     let content = block(width: 100%, breakable: false, fill: luma(80%), inset: 5pt, body)
 
     let header = if title != none {
-      set text(white)
-      set text(weight: "bold")
+      set text(theme.TitleFontColor, weight: "bold")
       block(
         width: 100%,
         breakable: false,
@@ -123,49 +122,54 @@
 #let title-slide(
   theme: ThemeFAU,
   title: "Title",
-  subtitle: "Subtitle",
-  authors: ("author1", "author 2"),
+  subtitle: none,
+  authors: (),
   institution: "FAU",
   date: datetime.today(),
 ) = {
-  set page(background: {
-    set image(fit: "stretch", width: 100%, height: 100%)
-    theme.TitleBackground
-  })
+  // needs to be here because of: https://github.com/typst/typst/issues/1467#issuecomment-1588684304
+  show footnote.entry: set text(fill: theme.TitleFontColor)
+  show footnote: set text(fill: theme.TitleFontColor)
 
-  let content = {
-    // show footnote.entry: set text(size: .6em)
+   let content = {
+    v(1.5cm)
+
     set text(fill: theme.TitleFontColor)
 
     // title
     text(size: TitleFontSize, weight: "bold", title)
 
     // subtitle
-    linebreak()
-    text(size: SecondFontSize, subtitle)
+    if subtitle != none {
+      linebreak()
+      text(size: SecondFontSize, subtitle)
+    }
+
+    v(0.5cm)
 
     // authors
-    stack(
-      dir: ltr,
-      spacing: 1cm,
-      ..authors.map(author => text(weight: "bold", size: TextFontSize, author)),
-    )
-
-    // author associations
-    // TODO:
+    // FIXME: this can overflow horizontally
+    stack(dir: ltr, spacing: 1cm, ..authors.map(author =>{
+      assert("name" in author)
+      text(weight: "bold", size: TextFontSize, if "email" in author {
+        link("mailto:" + author.email, author.name)
+      } else {
+        author.name
+      })
+      if "affiliation" in author {
+        footnote(author.affiliation)
+      }
+    }))
 
     // date
     text(size: TextFontSize, date.display("[month repr:long] [day], [year]"))
-    // set text(size: .8em, fill: col.TitleFont)
-    // grid(
-    //   columns: (5cm,) * calc.min(authors.len(), 3),
-    //   column-gutter: 1em,
-    //   row-gutter: 1em,
-    //   ..authors.map(author => text(author)),
-    // )
   }
 
   set page(
+    background: {
+      set image(fit: "stretch", width: 100%, height: 100%)
+      theme.TitleBackground
+    },
     margin: (
       left: config.SideBarWidthLeft,
       top: config.HeaderHeight + ascent,
@@ -213,20 +217,31 @@
   logic.polylux-slide(body)
 }
 
-// FIXME: use polylux outline
-#let toc() = {
-  set page(margin: (
-    left: config.SideBarWidthLeft,
-    top: config.HeaderHeight + ascent,
-    right: config.InnerRightMargin,
-    bottom: config.FootHeight + ascent,
-  ), header: none, footer: none, header-ascent: ascent * 2)
-  let content = text("filler")
+#let toc = with-theme(theme => {
+  set page(
+    margin: (
+      left: config.SideBarWidthLeft,
+      top: config.HeaderHeight + ascent,
+      right: config.InnerRightMargin,
+      bottom: config.FootHeight + ascent,
+    ),
+    header: title-header,
+    footer: none,
+    header-ascent: ascent * 2,
+    background: block(width: 100%, height: 100%, fill: theme.BaseColor),
+  )
+  set text(fill: theme.TitleFontColor)
+  let content = align(horizon)[
+    // TODO: if outline.len > 8: #utils.fit-to-height()
+    #utils.polylux-outline(enum-args: (full: true))
+  ]
   logic.polylux-slide(content)
-}
+})
 
 #let references = slide(title: "References")[
-  TODO: print bibliography
+  TODO // #fau-block(title: "References")[
+  //   #bibliography
+  // ]
 ]
 
 ///////////////
@@ -242,26 +257,60 @@
   institution: "FAU",
   body,
 ) = {
+  let theme = AllThemes.at(institution)
+
+  // global style setup
   set page(paper: "presentation-" + aspect-ratio)
   set text(font: FontFamily, size: TextFontSize)
+  // set block(spacing: 1em)
 
-  show heading: it => {
+  show heading.where(level: 1): it => {
     text(fill: green, it)
     utils.register-section(it)
-    slide(title: it)[
-      #text("hey there")
-      #text(utils.polylux-outline())
-    ]
+    toc
+    // TODO: make sure headings are not used inside of slides
+    // slide(title: it)[
+    //   #text("hey there")
+    //   #text(utils.polylux-outline())
+    // ]
   }
 
-  // TODO: update lists and terms and enumerations
+  // change enumerate numbering color
+  set enum(
+    full: true,
+    // FIXME: either use #numbering function or set full: false
+    numbering: (..n) => text(fill: theme.BaseColor, [#n.pos().map(x => str(x)).join(".").]),
+  )
 
+  // change terms color
+  show terms.item: it => {
+    text(fill: theme.BaseColor, strong(it.term + ":")) + h(0.5em, weak: true) + text(it.description) + linebreak()
+  }
+  // show terms: it => {
+  //   for i in it.children {
+  //     emph(i.term) + h(0.5em) + strong(i.description) + linebreak()
+  //   }
+  // }
+  // show terms: it => list(
+  //   marker: none,
+  //   body-indent: 0em,
+  //   ..it.children //.map(i => emph(i.term) + h(0.5em) + strong(i.description)),
+  // )
+
+  // change list bullet color
+  set list(marker: (
+    text(fill: theme.BaseColor, "•"), // first level
+    ..((text(fill: theme.BaseColor, "◦")),) * 100, // next 100 levels
+  ))
+
+  // state updates
   state-short-title.update(short-title)
   state-short-author.update(short-author)
   state-short-date.update(short-date)
   state-short-organization.update(short-organization)
   state-institution.update(institution)
-  state-theme.update(AllThemes.at(institution))
+  state-theme.update(theme)
 
+  // include document
   body
 }

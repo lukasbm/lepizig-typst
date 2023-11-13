@@ -16,4 +16,6 @@
   date: date,
 )
 
+#let slide(slide-args: (:), body) = main.slide(theme: ThemeTech, ..slide-args, body)
+
 // TODO: do this for the other slide methods

@@ -14,10 +14,21 @@
 #title-slide(
   theme: ThemeFAU, // FIXME: this should not be needed
   title: "Test Document showing off the theme",
-  subtitle: "in typst",
+  subtitle: "in Typst, the new Markup Language",
+  authors: (
+    (
+      name: "Theresa Tungsten",
+      affiliation: "Artos Institute",
+      email: "tung@artos.edu",
+    ),
+    (name: "Eugene Deklan", affiliation: "Honduras State"),
+    (name: "Lukas Böhm"),
+  ),
 )
 
 #slide(title: "Introduction", subtitle: "What is this?")[
+  = Test thing one
+  == Test thing nested
   This file demonstrates the usage of the FAU theme for typst.
 ]
 
@@ -65,18 +76,17 @@
   - This is a list
   - with items
     - and inner items
-    - and more inner items
 
   + This is an enumerate
+    + inner enumeration
   + with some more items
 
-  / Terms: A terms environment.
-  / Keyword: With some fancy words.
+  / Term1: A terms element.
+  / Term2: With some fancy words.
 
-  ```
-  this is some code
-  ```
-  Or also `inline` code.
+  Inline `code` is also available. ```bash
+          echo "and raw code blocks as well"
+          ```
 ]
 
 #slide(
@@ -117,12 +127,11 @@
 #slide(title: "Normal Slide", subtitle: "With normal dimensions")[
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
-      This is the area you can fill on a normal slide created with:
-      ```typst
-        #slide(title: "Title")[
-          content
-        ]
-      ```
+      This is the area you can fill on a normal slide created with: ```typst
+                                #slide(title: "Title")[
+                                  content
+                                ]
+                              ```
     ]
   ]
 ]

@@ -7,9 +7,5 @@
 
 #let FontFamily = "FAUSans Office"
 
-#let setup-fonts = {
-  show heading: set text(font: FontFamily, weight: "bold", size: TitleFontSize)
-}
-
 // only use Regular, Italic, Bold font
 // TODO: setup fonts for the different classes!

@@ -2,12 +2,11 @@
 
 ## Develop
 
-`cd example && typst watch --root .. --font-path fau-beamer-main/fonts test.typ test.pdf`
+`cd example && typst watch --root .. --font-path ./fonts/ test.typ test.pdf`
 
 ### Helper: convert all pdfs to svgs
 
 `find . -type f -name "*.pdf" -exec sh -c 'pdf2svg "$0" "${0%.pdf}.svg"' {} \;`
-
 
 ## Sources
 

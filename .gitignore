@@ -1,8 +1,11 @@
 # fau template (local dev)
-fau-beamer-main
+fau-beamer*
 
 # pdf files (as typst does not support them)
 *.pdf
 
 # scratch files
 scratch/
+
+# fonts
+fonts/

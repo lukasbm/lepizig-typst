@@ -1,0 +1,9 @@
+[package]
+name = "fau-typst"
+version = "0.0.1"
+entrypoint = "fau-typst.typ"
+authors = ["Lukas Böhm"]
+license = "TODO"
+description = "FAU slide template in typst"
+repository = "https://github.com/lukasbm/fau-typst"
+exclude = ["README.md"]

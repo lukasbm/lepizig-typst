@@ -3,3 +3,6 @@ fau-beamer-main
 
 # pdf files (as typst does not support them)
 *.pdf
+
+# scratch files
+scratch/

@@ -219,13 +219,6 @@
   logic.polylux-slide(body)
 }
 
-#let toc2 = locate(loc => {
-  let q = heading.where(level: 1)
-  let headings-inside-slide = query(q, loc)
-  assert(type(headings-inside-slide) == array)
-  text(headings-inside-slide.join("."))
-})
-
 #let toc = with-theme(theme => {
   set page(
     margin: (
@@ -248,15 +241,51 @@
 })
 
 #let references = slide(title: "References")[
-  TODO // #fau-block(title: "References")[
+  TODO reference slide! // #fau-block(title: "References")[
   //   #bibliography
   // ]
 ]
 
-#let section-slide = {
-  // TODO: section slide instead of customizing headings ...
-  // TODO: use a show rule like: #show heading.where(level: 1): it => {} to disable heading
+#let section-slide(title) = {
+  utils.register-section(title)
+  slide(title: title)[
+    #utils.sections-state.display(secs => secs.map(x => x.body))
+    and
+    #utils.current-section
+  ]
 }
+
+#let section-slide2(title) = with-theme(
+  theme => {
+    assert(title != none and type(title) == str)
+
+    let secs = utils.sections-state.display()
+
+    // utils.register-section(title)
+
+    // TODO: section slide instead of customizing headings ...
+    // TODO: use a show rule like: #show heading.where(level: 1): it => {} to disable heading
+
+    set page(
+      margin: (
+        left: config.SideBarWidthLeft,
+        top: config.HeaderHeight + ascent,
+        right: config.InnerRightMargin,
+        bottom: config.FootHeight + ascent,
+      ),
+      header: title-header,
+      footer: none,
+      header-ascent: ascent * 2,
+      background: block(width: 100%, height: 100%, fill: theme.BaseColor),
+    )
+    set text(fill: theme.TitleFontColor)
+    let content = align(horizon)[
+      hey there
+      #secs
+    ]
+    logic.polylux-slide(content)
+  },
+)
 
 ///////////////
 // Setup
@@ -278,12 +307,23 @@
   set text(font: FontFamily, size: TextFontSize)
   // set block(spacing: 1em)
 
-  show heading.where(level: 1): it => {
-    text(fill: green, it)
-    utils.register-section(it)
-    // TODO: make sure headings are not used inside of slides
-    toc
-  }
+  // essentially disable level 1 headings
+  show heading.where(level: 1): it => {}
+
+  // old attempts at heading handling.
+  // hard to see what element function a headign is in without doing something cursed like this:
+  // #show: it => it.children.fold(
+  //   (),
+  //   (arr, el) => {
+  //     if el.func() == heading { arr.push((el,)) } else if arr.len() > 0 { arr.last().push(el) }
+  //     arr
+  //   },
+  // )
+  // show heading.where(level: 1): it => {
+  //   utils.register-section(it)
+  //   // TODO: make sure headings are not used inside of slides
+  //   toc
+  // }
 
   // change enumerate numbering color
   set enum(

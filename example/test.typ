@@ -25,9 +25,24 @@
 )
 
 #slide(title: "Introduction", subtitle: "What is this?")[
-  = Test thing one
-  == Test thing nested
   This file demonstrates the usage of the FAU theme for typst.
+]
+
+#slide(
+  title: "Sections",
+  subtitle: "And how to use them",
+)[
+  Sections in slides are always tricky to handle.
+
+  In this template level 1 headings defined like: `= Heading of level 1` are
+  disabled. Instead you use `#section-slide("Title")`. This will register the
+  section and generate an overview slide with the current section highlighted.
+
+  The other heading levels should work as intended.
+
+  = Should not show!
+  == Should show second level heading
+  === and 3rd level as well
 ]
 
 #slide(title: "Full slide")[
@@ -48,13 +63,6 @@
       #lorem(5)
     ]
   ]
-]
-
-= Example Section
-
-// FIXME: slides after a TOC slide are broken!
-#slide(title: "asdasd")[
-  asdasd
 ]
 
 #slide(title: "Blocks")[
@@ -95,9 +103,10 @@
   / Term1: A terms element.
   / Term2: With some fancy words.
 
-  Inline `code` is also available. ```bash
-              echo "and raw code blocks as well"
-              ```
+  Inline `code` is also available.
+  ```bash
+  echo "and raw code blocks as well"
+  ```
 ]
 
 #slide(
@@ -111,7 +120,7 @@
 
 // TODO: slide showing off animations/overlays
 
-= Color Palette
+#section-slide("Color Palette")
 
 #slide(
   title: "Institutional Themes",
@@ -133,16 +142,17 @@
 
 // TODO: show of baseColor, etc.
 
-= Slide Environments
+#section-slide("Slide Environments")
 
 #slide(title: "Normal Slide", subtitle: "With normal dimensions")[
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
-      This is the area you can fill on a normal slide created with: ```typst
-                                            #slide(title: "Title")[
-                                              content
-                                            ]
-                                          ```
+      This is the area you can fill on a normal slide created with:
+      ```typst
+      #slide(title: "Title")[
+      content
+      ]
+      ```
     ]
   ]
 ]
@@ -172,7 +182,7 @@
   The content is centered and text looks like a quote.
 ]
 
-= Equations and Math
+#section-slide("Equations and Math")
 
 #slide(title: "Equations")[
   #align(horizon)[
@@ -185,18 +195,18 @@
   ]
 ]
 
-= Citations
+#section-slide("Citations")
 
 #slide(title: "Citations")[
   #align(horizon)[
-    // This is a citation: @cite:example
+    citation slide empty for now // This is a citation: @cite:example
   ]
 ]
 
 // TODO: styling is broken by this point ... due to set page overwrites ... need to scope them
-#references
+// #references
 
-= Presentation
+#section-slide("Presentation")
 
 #slide(title: "Notes and `pdfpc`")[
   TODO: explain how to use notes and pdfpc

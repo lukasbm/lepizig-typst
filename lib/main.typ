@@ -219,6 +219,23 @@
   logic.polylux-slide(body)
 }
 
+#let references = slide(title: "References")[
+  TODO reference slide! // #fau-block(title: "References")[
+  //   #bibliography
+  // ]
+]
+
+#let section-slide(title) = {
+  utils.register-section(title)
+
+  slide(title: title)[
+    #utils.sections-state.display(secs => secs.map(x => x.body))
+    and
+    #utils.current-section
+  ]
+}
+
+// old slide: REMOVE!!!
 #let toc = with-theme(theme => {
   set page(
     margin: (
@@ -239,22 +256,6 @@
   ]
   logic.polylux-slide(content)
 })
-
-#let references = slide(title: "References")[
-  TODO reference slide! // #fau-block(title: "References")[
-  //   #bibliography
-  // ]
-]
-
-#let section-slide(title) = {
-  utils.register-section(title)
-
-  slide(title: title)[
-    #utils.sections-state.display(secs => secs.map(x => x.body))
-    and
-    #utils.current-section
-  ]
-}
 
 ///////////////
 // Setup

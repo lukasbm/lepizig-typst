@@ -1,5 +1,5 @@
-#import "../main.typ";
-#import "../colors.typ": ThemeTech;
+#import "../lib/main.typ";
+#import "../lib/colors.typ": ThemeTech;
 
 #let title-slide(
   title: "Title",
@@ -17,5 +17,3 @@
 )
 
 #let slide(slide-args: (:), body) = main.slide(theme: ThemeTech, ..slide-args, body)
-
-// TODO: do this for the other slide methods

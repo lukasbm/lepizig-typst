@@ -1,5 +1,5 @@
-#import "../main.typ";
-#import "../colors.typ": ThemeFAU;
+#import "../lib/main.typ";
+#import "../lib/colors.typ": ThemeFAU;
 
 #let title-slide(
   title: "Title",
@@ -15,5 +15,3 @@
   institution: institution,
   date: date,
 )
-
-// TODO: do this for the other slide methods

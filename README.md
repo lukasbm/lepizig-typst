@@ -30,6 +30,7 @@
 - FAU Sans Office (kommerzielle Lizenz, nur für interne Zwecke)
 
 ## Roadmap
+
 - [ ] overwrite the heading function to instead insert a TOC slide
 - [ ] disable headings inside of slides
 - [ ] abstract the font sizes better

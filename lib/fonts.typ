@@ -5,7 +5,5 @@
 #let TextFontSize = 20pt
 #let SmallFontSize = 16pt
 
-#let FontFamily = "FAUSans Office"
-
 // only use Regular, Italic, Bold font
-// TODO: setup fonts for the different classes!
+#let FontFamily = "FAUSans Office"

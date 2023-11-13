@@ -140,7 +140,7 @@
   ]
 ]
 
-// TODO: show of baseColor, etc.
+// TODO: show off BaseColor, etc.
 
 #section-slide("Slide Environments")
 
@@ -203,12 +203,11 @@
   ]
 ]
 
-// TODO: styling is broken by this point ... due to set page overwrites ... need to scope them
+// FIXME: styling is broken by this point ... due to set page overwrites ... need to scope them
 // #references
 
 #section-slide("Presentation")
 
 #slide(title: "Notes and `pdfpc`")[
   TODO: explain how to use notes and pdfpc
-
 ]

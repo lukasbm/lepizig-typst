@@ -36,3 +36,9 @@
 - [ ] set correct baselineskip with #par.spacing (or #text)
 - [ ] fix the bug where empty slides (with title) are not displayed
 - [ ] set a license
+
+## Relevant Issues
+
+- [double line spacing[](https://github.com/typst/typst/issues/106)
+- [restore layout](https://github.com/typst/typst/issues/361)
+- [restore layout](https://github.com/typst/typst/issues/420)

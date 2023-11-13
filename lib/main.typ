@@ -60,7 +60,7 @@
 
 #let header(title: none, subtitle: none) = with-theme(theme => {
   grid(
-    columns: (auto, 1fr, auto),
+    columns: (70%, 1fr, auto),
     row-gutter: 0pt,
     column-gutter: 1em,
     align(left)[
@@ -76,7 +76,7 @@
       }
     ],
     [],
-    align(right)[
+    align(top + right)[
       // Logo
       #set image(width: config.WordMarkWidth, height: config.WordMarkHeight)
       #WortmarkeBlue
@@ -235,7 +235,7 @@
   set text(fill: theme.TitleFontColor)
   let content = align(horizon)[
     // TODO: if outline.len > 8: #utils.fit-to-height()
-    #utils.polylux-outline(enum-args: (full: true, numbering: "1."))
+    // TODO: content
   ]
   logic.polylux-slide(content)
 })
@@ -248,44 +248,13 @@
 
 #let section-slide(title) = {
   utils.register-section(title)
+
   slide(title: title)[
     #utils.sections-state.display(secs => secs.map(x => x.body))
     and
     #utils.current-section
   ]
 }
-
-#let section-slide2(title) = with-theme(
-  theme => {
-    assert(title != none and type(title) == str)
-
-    let secs = utils.sections-state.display()
-
-    // utils.register-section(title)
-
-    // TODO: section slide instead of customizing headings ...
-    // TODO: use a show rule like: #show heading.where(level: 1): it => {} to disable heading
-
-    set page(
-      margin: (
-        left: config.SideBarWidthLeft,
-        top: config.HeaderHeight + ascent,
-        right: config.InnerRightMargin,
-        bottom: config.FootHeight + ascent,
-      ),
-      header: title-header,
-      footer: none,
-      header-ascent: ascent * 2,
-      background: block(width: 100%, height: 100%, fill: theme.BaseColor),
-    )
-    set text(fill: theme.TitleFontColor)
-    let content = align(horizon)[
-      hey there
-      #secs
-    ]
-    logic.polylux-slide(content)
-  },
-)
 
 ///////////////
 // Setup

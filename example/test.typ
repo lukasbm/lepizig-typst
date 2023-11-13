@@ -1,5 +1,5 @@
 #import "@preview/polylux:0.3.1": *
-#import "../theme/main.typ": *
+#import "../lib/main.typ": *
 
 #show: fau-theme.with(
   short-author: "Lukas Böhm",
@@ -112,7 +112,7 @@
 #slide(
   title: "Graphics",
 )[
-  #import "../theme/colors.typ": WortmarkeBlue
+  #import "../lib/colors.typ": WortmarkeBlue
   #figure(image(WortmarkeBlue.path, width: 75%), caption: "This is a caption") <fig:logo>
 
   The image @fig:logo is a figure with a caption.

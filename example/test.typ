@@ -9,8 +9,6 @@
   institution: "FAU",
 )
 
-#polylux-slide[need this empty slide due to a bug with state updates]
-
 #title-slide(
   theme: ThemeFAU, // FIXME: this should not be needed
   title: "Test Document showing off the theme",
@@ -32,6 +30,14 @@
   This file demonstrates the usage of the FAU theme for typst.
 ]
 
+#slide(title: "Full slide")[
+  Slides with too much content are automatically broken up
+
+  #lorem(200)
+
+  *Still the same slide!*
+]
+
 #slide(title: "Side by Side", subtitle: "Organizing content on the slide")[
   #align(horizon + center)[
     #side-by-side[
@@ -45,6 +51,11 @@
 ]
 
 = Example Section
+
+// FIXME: slides after a TOC slide are broken!
+#slide(title: "asdasd")[
+  asdasd
+]
 
 #slide(title: "Blocks")[
   A block is a container for content, it can have a title and any content.
@@ -85,8 +96,8 @@
   / Term2: With some fancy words.
 
   Inline `code` is also available. ```bash
-          echo "and raw code blocks as well"
-          ```
+              echo "and raw code blocks as well"
+              ```
 ]
 
 #slide(
@@ -128,10 +139,10 @@
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
       This is the area you can fill on a normal slide created with: ```typst
-                                #slide(title: "Title")[
-                                  content
-                                ]
-                              ```
+                                            #slide(title: "Title")[
+                                              content
+                                            ]
+                                          ```
     ]
   ]
 ]
@@ -189,4 +200,5 @@
 
 #slide(title: "Notes and `pdfpc`")[
   TODO: explain how to use notes and pdfpc
+
 ]

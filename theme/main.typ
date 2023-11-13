@@ -127,11 +127,13 @@
   institution: "FAU",
   date: datetime.today(),
 ) = {
+  logic.polylux-slide(text("need this empty slide due to a bug with state updates"))
+
   // needs to be here because of: https://github.com/typst/typst/issues/1467#issuecomment-1588684304
   show footnote.entry: set text(fill: theme.TitleFontColor)
   show footnote: set text(fill: theme.TitleFontColor)
 
-   let content = {
+  let content = {
     v(1.5cm)
 
     set text(fill: theme.TitleFontColor)
@@ -217,6 +219,13 @@
   logic.polylux-slide(body)
 }
 
+#let toc2 = locate(loc => {
+  let q = heading.where(level: 1)
+  let headings-inside-slide = query(q, loc)
+  assert(type(headings-inside-slide) == array)
+  text(headings-inside-slide.join("."))
+})
+
 #let toc = with-theme(theme => {
   set page(
     margin: (
@@ -233,7 +242,7 @@
   set text(fill: theme.TitleFontColor)
   let content = align(horizon)[
     // TODO: if outline.len > 8: #utils.fit-to-height()
-    #utils.polylux-outline(enum-args: (full: true))
+    #utils.polylux-outline(enum-args: (full: true, numbering: "1."))
   ]
   logic.polylux-slide(content)
 })
@@ -243,6 +252,11 @@
   //   #bibliography
   // ]
 ]
+
+#let section-slide = {
+  // TODO: section slide instead of customizing headings ...
+  // TODO: use a show rule like: #show heading.where(level: 1): it => {} to disable heading
+}
 
 ///////////////
 // Setup
@@ -267,12 +281,8 @@
   show heading.where(level: 1): it => {
     text(fill: green, it)
     utils.register-section(it)
-    toc
     // TODO: make sure headings are not used inside of slides
-    // slide(title: it)[
-    //   #text("hey there")
-    //   #text(utils.polylux-outline())
-    // ]
+    toc
   }
 
   // change enumerate numbering color

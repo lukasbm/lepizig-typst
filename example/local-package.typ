@@ -1,4 +1,5 @@
-#import "@local/fau-typst:0.0.1": main
+#import "@local/fau-typst:0.0.1": tech-theme
+#import tech-theme: *
 
 #show: main.fau-theme.with(
   short-author: "Lukas Böhm",

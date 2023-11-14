@@ -9,6 +9,12 @@
   institution: "Nat",
 )
 
+#polylux-slide[
+  need this empty slide at the beginngin due to a bug with state updates
+
+  Issue will be resolved _hopefully_ soon.
+]
+
 #title-slide(
   title: "Test Document showing off the theme",
   subtitle: "in Typst, the new Markup Language",
@@ -67,17 +73,23 @@
 #slide(title: "Blocks")[
   A block is a container for content, it can have a title and any content.
 
+  #let fau-block-themed(..args) = fau-block(..args)(ThemeNat)
+
   #fau-block(title: "Block Header")[
+    Block content
+  ](ThemeFAU)
+
+  #fau-block-themed(title: "asdasdas")[
     Block content
   ]
 
   Use any environment (like grid) to shape and align blocks.
 
-  #grid(columns: (1fr, 1fr), gutter: 2em, fau-block()[
-    smaller block (no title)
-  ], fau-block(title: "hey there")[
-    smaller block (with title)
-  ])
+  // #grid(columns: (1fr, 1fr), gutter: 2em, fau-block()[
+  //   smaller block (no title)
+  // ], fau-block(title: "hey there")[
+  //   smaller block (with title)
+  // ])
 ]
 
 #slide(
@@ -102,10 +114,9 @@
   / Term1: A terms element.
   / Term2: With some fancy words.
 
-  Inline `code` is also available.
-  ```bash
-  echo "and raw code blocks as well"
-  ```
+  Inline `code` is also available. ```bash
+    echo "and raw code blocks as well"
+    ```
 ]
 
 #slide(
@@ -146,12 +157,11 @@
 #slide(title: "Normal Slide", subtitle: "With normal dimensions")[
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
-      This is the area you can fill on a normal slide created with:
-      ```typst
-      #slide(title: "Title")[
-      content
-      ]
-      ```
+      This is the area you can fill on a normal slide created with: ```typst
+            #slide(title: "Title")[
+            content
+            ]
+            ```
     ]
   ]
 ]

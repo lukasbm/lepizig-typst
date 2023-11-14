@@ -1,5 +1,6 @@
-#import "@local/fau-typst:0.0.1": tech-theme
-#import tech-theme: *
+#import "@preview/polylux:0.3.1": *
+#import "@local/fau-typst:0.0.1": fau-theme
+#import fau-theme: *
 
 #show: main.fau-theme.with(
   short-author: "Lukas Böhm",
@@ -9,8 +10,13 @@
   institution: "FAU",
 )
 
-#main.title-slide(
-  theme: main.ThemeFAU, // FIXME: this should not be needed
+#polylux-slide[
+  need this empty slide at the beginngin due to a bug with state updates
+
+  Issue will be resolved _hopefully_ soon.
+]
+
+#title-slide(
   title: "Test Document showing off the theme",
   subtitle: "in Typst, the new Markup Language",
   authors: (
@@ -24,6 +30,6 @@
   ),
 )
 
-#main.slide(title: "Introduction", subtitle: "What is this?")[
+#slide(title: "Introduction", subtitle: "What is this?")[
   This file demonstrates the usage of the FAU theme for typst.
 ]

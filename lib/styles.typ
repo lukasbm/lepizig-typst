@@ -1,5 +1,3 @@
-#import "util.typ": state-theme
-
 #let styled-enum(theme) = body => {
   set enum(
     full: true,

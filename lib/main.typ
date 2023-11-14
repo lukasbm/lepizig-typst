@@ -173,7 +173,7 @@
       right: config.InnerRightMargin,
       bottom: config.FootHeight + ascent,
     ),
-    header: title-header,
+    header: title-header(theme),
     footer: none,
     footer-descent: ascent,
     header-ascent: ascent * 2,
@@ -191,7 +191,7 @@
       bottom: config.FootHeight + ascent,
     ),
     header: header(title: title, subtitle: subtitle)(theme),
-    footer: footer,
+    footer: footer(theme),
     footer-descent: ascent,
     header-ascent: ascent * 2,
   )
@@ -209,7 +209,7 @@
     top: ascent * 2,
     right: config.InnerRightMargin,
     bottom: config.FootHeight + ascent,
-  ), header: none, footer: footer)
+  ), header: none, footer: footer(theme))
   logic.polylux-slide(body)
 }
 
@@ -294,8 +294,6 @@
   state-short-author.update(short-author)
   state-short-date.update(short-date)
   state-short-organization.update(short-organization)
-  state-institution.update(institution)
-  state-theme.update(theme)
 
   // include document
   body

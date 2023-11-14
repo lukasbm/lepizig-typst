@@ -8,8 +8,6 @@
 #let state-short-author = state("short-author", none)
 #let state-short-date = state("short-date", datetime.today())
 #let state-short-organization = state("short-organization", none)
-#let state-institution = state("institution", "FAU")
-#let state-theme = state("theme", ThemeFAU)
 
 #let state-to-string(content) = {
   if content.has("text") {

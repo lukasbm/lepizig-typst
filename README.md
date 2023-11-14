@@ -25,16 +25,18 @@ python3 install.py  # run the cross-platform install script (just copies the sou
 The default setup will look like this:
 ```typst
 #import "@preview/polylux:0.3.1": *
-#import "../fau-typst.typ": <institution>-theme, main
-#import <intitution>-theme: *
+#import "@local/fau-typst:0.0.1": <institution>-theme, main
+#import <intitution>-theme: *  // import everything from the theme (slide types)
 
+// initialize the template with this function (important!)
 #show: main.fau-theme.with(
-  aspect-ratio: "16-9",
   short-author: "Lukas Böhm",
   short-title: "Test Document",
   short-date: datetime.today(),
   short-organization: "Lab1",
+  institution: "FAU",
 )
+
 ```
 Where `<institution>` can be replaced with either: `fau`, `nat`, `phil`, `rw`, `tech`, `med`.
 Just changing the import statement will update the entire theme.
@@ -58,11 +60,10 @@ Write your first presentation. For example like this:
   ),
 )
 
-#section-slide("The Basics")
-
 #slide(title: "Introduction", subtitle: "What is this?")[
   This file demonstrates the usage of the FAU theme for typst.
 ]
+
 ```
 
 ## Examples

@@ -38,7 +38,7 @@
 #let config16by9 = (
   // outer
   SideBarWidthLeft: 14.4mm,
-  HeaderHeight: 3.5em, // 5mm,
+  HeaderHeight: 3em,
   HeaderTitleHeight: 4mm,
   TitleHeight: 33mm,
   TitleLineHeight: 10mm,
@@ -57,11 +57,12 @@
   WordMarkLeftWidth: 74mm,
   WordMarkBoxWidth: 60mm,
   WordMarkSkip: 12mm,
+  KennungHeight: 18mm,
   // inner
   InnerTitleTitleSkip: 3.5mm,
   InnerWordMarkTitleHeight: 21.9mm,
   InnerWordMarkTitleWidth: 55.2mm,
-  InnerHeaderHeight: 5mm,
+  InnerHeaderHeight: 3em,
   InnerTitleHeight: 30mm,
   InnerTitleLineHeight: 10mm,
   InnerRightMargin: 3.5mm,

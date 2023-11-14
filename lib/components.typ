@@ -27,13 +27,13 @@
   grid(
     columns: (auto, 1fr, auto),
     rows: (auto),
-    align(left)[
+    align(horizon + left)[
       // Kennung
-      #set image(height: 2cm)
+      #set image(height: config.KennungHeight)
       #theme.KennungWhite
     ],
     align(
-      right,
+      horizon + right,
     )[
       // Logo
       #set image(width: config.WordMarkTitleWidth, height: config.WordMarkTitleHeight)
@@ -84,7 +84,7 @@
 
 #let footer = theme => {
   // line
-  show line: set block(above: 0em, below: 3mm)
+  show line: set block(above: 0mm, below: 3mm)
   line(length: 200%, stroke: config.LineWidthThin + theme.SeparationLineColor)
 
   // short texts

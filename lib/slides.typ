@@ -56,7 +56,7 @@
     },
     margin: (
       left: config.SideBarWidthLeft,
-      top: config.HeaderHeight + ascent,
+      top: config.HeaderHeight + ascent * 2,
       right: config.InnerRightMargin,
       bottom: config.FootHeight + ascent,
     ),
@@ -73,7 +73,7 @@
   set page(
     margin: (
       left: config.SideBarWidthLeft,
-      top: config.HeaderHeight + ascent,
+      top: config.HeaderHeight + ascent * 2,
       right: config.InnerRightMargin,
       bottom: config.FootHeight + ascent,
     ),
@@ -117,7 +117,7 @@
   set page(
     margin: (
       left: config.SideBarWidthLeft,
-      top: config.HeaderHeight + ascent,
+      top: config.HeaderHeight + ascent * 2,
       right: config.InnerRightMargin,
       bottom: config.FootHeight + ascent,
     ),
@@ -128,9 +128,6 @@
   )
   set text(fill: theme.TitleFontColor)
 
-  // return
-
-  // FIXME: all the links are broken!
   locate(loc => {
     let secs = utils.sections-state.at(loc) // every entry has body and loc
     let current-sec = title // utils.current-section

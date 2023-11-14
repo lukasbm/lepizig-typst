@@ -72,5 +72,6 @@ if __name__ == "__main__":
 
     # copy files
     copy_files(
-        source_dir=os.getcwd(), target_dir=os.path.join(data_dir, "typst", "packages", "local", name, version)
+        source_dir=os.getcwd(),
+        target_dir=os.path.join(data_dir, "typst", "packages", "local", name, version)
     )

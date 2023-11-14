@@ -1,8 +1,9 @@
 #import "@preview/polylux:0.3.1": *
-#import "../fau-typst.typ": fau-theme, main
-#import fau-theme: *
+#import "../fau-typst.typ": tech-theme, main
+#import tech-theme: *
 
 #show: main.fau-theme.with(
+  aspect-ratio: "16-9",
   short-author: "Lukas Böhm",
   short-title: "Test Document",
   short-date: datetime.today(),
@@ -10,9 +11,9 @@
 )
 
 #polylux-slide[
-  need this empty slide at the beginngin due to a bug with state updates
+  need this (almost) empty slide at the beginngin due to a bug with state updates
 
-  Issue will be resolved _hopefully_ soon.
+  This Issue will be resolved _hopefully_ soon.
 ]
 
 #title-slide(
@@ -28,6 +29,8 @@
     (name: "Lukas Böhm"),
   ),
 )
+
+#section-slide("The Basics")
 
 #slide(title: "Introduction", subtitle: "What is this?")[
   This file demonstrates the usage of the FAU theme for typst.
@@ -109,8 +112,8 @@
   / Term2: With some fancy words.
 
   Inline `code` is also available. ```bash
-            echo "and raw code blocks as well"
-            ```
+                            echo "and raw code blocks as well"
+                            ```
 ]
 
 #slide(
@@ -144,19 +147,58 @@
   ]
 ]
 
-// TODO: show off BaseColor, etc.
+#slide(title: "The Colors", subtitle: "Base and Dark theme")[
+  How to use color themes:
+
+  #let box-size = 2cm
+  #set align(horizon + center)
+
+  #grid(columns: (auto, auto), gutter: 8cm, table(
+    stroke: none,
+    inset: 1pt,
+    columns: (box-size, auto),
+    align: left,
+    column-gutter: 1em,
+    rect(width: box-size, height: box-size, fill: BaseColor),
+    `BaseColor`,
+    rect(width: box-size, height: box-size, fill: BaseColorA),
+    `BaseColorA`,
+    rect(width: box-size, height: box-size, fill: BaseColorB),
+    `BaseColorB`,
+    rect(width: box-size, height: box-size, fill: BaseColorC),
+    `BaseColorC`,
+    rect(width: box-size, height: box-size, fill: BaseColorD),
+    `BaseColorD`,
+  ), table(
+    stroke: none,
+    inset: 1pt,
+    columns: (box-size, auto),
+    align: left,
+    column-gutter: 1em,
+    rect(width: box-size, height: box-size, fill: BaseDarkColor),
+    `BaseDarkColor`,
+    rect(width: box-size, height: box-size, fill: BaseDarkColorA),
+    `BaseDarkColorA`,
+    rect(width: box-size, height: box-size, fill: BaseDarkColorB),
+    `BaseDarkColorB`,
+    rect(width: box-size, height: box-size, fill: BaseDarkColorC),
+    `BaseDarkColorC`,
+    rect(width: box-size, height: box-size, fill: BaseDarkColorD),
+    `BaseDarkColorD`,
+  ))
+
+]
 
 #section-slide("Slide Environments")
 
 #slide(title: "Normal Slide", subtitle: "With normal dimensions")[
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
-      This is the area you can fill on a normal slide created with:
-      ```typst
-        #slide(title: "Title")[
-        content
-        ]
-      ```
+      This is the area you can fill on a normal slide created with: ```typst
+                                                        #slide(title: "Title")[
+                                                        content
+                                                        ]
+                                                      ```
     ]
   ]
 ]
@@ -164,12 +206,11 @@
 #slide-plain[
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
-      more space
-      ```typst
-        #slide-plain(title: "Title")[
-        content
-        ]
-      ```
+      more space ```typst
+                                                        #slide-plain(title: "Title")[
+                                                        content
+                                                        ]
+                                                      ```
     ]
   ]
 ]
@@ -177,12 +218,11 @@
 #slide-fullscreen[
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
-      even more space
-      ```typst
-        #slide-fullscreen(title: "Title")[
-        content
-        ]
-      ```
+      even more space ```typst
+                                                        #slide-fullscreen(title: "Title")[
+                                                        content
+                                                        ]
+                                                      ```
     ]
   ]
 ]

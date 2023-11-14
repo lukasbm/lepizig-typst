@@ -11,14 +11,8 @@
   institution: "FAU",
   date: datetime.today(),
 ) = theme => {
-  // needs to be here because of: https://github.com/typst/typst/issues/1467#issuecomment-1588684304
-  show footnote.entry: set text(fill: theme.TitleFontColor)
-  show footnote: set text(fill: theme.TitleFontColor)
-
   let content = {
     v(1.5cm)
-
-    set text(fill: theme.TitleFontColor)
 
     // title
     text(size: TitleFontSize, weight: "bold", title)
@@ -49,94 +43,73 @@
     text(size: TextFontSize, date.display("[month repr:long] [day], [year]"))
   }
 
-  set page(
-    background: {
-      set image(fit: "stretch", width: 100%, height: 100%)
-      theme.TitleBackground
-    },
-    margin: (
-      left: config.SideBarWidthLeft,
-      top: config.HeaderHeight + ascent * 2,
-      right: config.InnerRightMargin,
-      bottom: config.FootHeight + ascent,
-    ),
-    header: title-header(theme),
-    footer: none,
-    footer-descent: ascent,
-    header-ascent: ascent * 2,
-  )
-
+  // needs to be here because of: https://github.com/typst/typst/issues/1467#issuecomment-1588684304
+  show footnote.entry: set text(fill: theme.TitleFontColor)
+  show footnote: set text(fill: theme.TitleFontColor)
+  show: page-with-title-header-and-background(theme)
   logic.polylux-slide(content)
 }
 
 #let slide(title: none, subtitle: none, body) = theme => {
-  set page(
-    margin: (
-      left: config.SideBarWidthLeft,
-      top: config.HeaderHeight + ascent * 2,
-      right: config.InnerRightMargin,
-      bottom: config.FootHeight + ascent,
-    ),
-    header: header(title: title, subtitle: subtitle)(theme),
-    footer: footer(theme),
-    footer-descent: ascent,
-    header-ascent: ascent * 2,
-  )
+  show: page-with-header-and-footer(theme, title, subtitle)
   show: styled-enum(theme)
   show: styled-terms(theme)
   show: styled-list(theme)
-
   logic.polylux-slide(body)
 }
 
-#let focus-slide(title: "", body) = theme => slide(title: title, align(center + horizon, body))(theme)
+#let focus-slide(title: none, subtitle: none, body) = theme => {
+  show: page-with-header-and-footer(theme, title, subtitle)
+  show text: emph
+  let content = align(center + horizon, body)
+  logic.polylux-slide(content)
+}
 
 #let slide-plain(body) = theme => {
-  set page(margin: (
-    top: ascent * 2,
-    right: config.InnerRightMargin,
-    bottom: config.FootHeight + ascent,
-  ), header: none, footer: footer(theme))
+  show: page-with-footer(theme)
   logic.polylux-slide(body)
 }
 
 #let slide-fullscreen(body) = theme => {
-  set page(margin: 0em, header: none, footer: none)
+  show: page-full-screen(theme)
   logic.polylux-slide(body)
 }
 
-#let references-slide = slide(title: "References")[
-  TODO reference slide! // #fau-block(title: "References")[
-  //   #bibliography
-  // ]
-]
-
 #let section-slide(title) = theme => {
-  set page(fill: theme.BaseColor)
-  set text(size: TitleFontSize, weight: "bold", fill: theme.TitleFontColor)
-  set page(
-    margin: (
-      left: config.SideBarWidthLeft,
-      top: config.HeaderHeight + ascent * 2,
-      right: config.InnerRightMargin,
-      bottom: config.FootHeight + ascent,
-    ),
-    header: title-header(theme),
-    footer: none,
-    header-ascent: ascent * 2,
-    background: block(width: 100%, height: 100%, fill: theme.BaseColor),
+  show: page-with-title-header-and-fill(theme)
+
+  locate(
+    loc => {
+      let secs = utils.sections-state.final(loc) // every entry has body and loc
+      let current-sec = title // utils.current-section
+
+      // FIXME: colors
+      let render-section(sec) = {
+        if sec.body == current-sec {
+          [ + #link(loc)[#text(fill: theme.TitleFontColor, current-sec)] ]
+        } else {
+          [ + #link(sec.loc)[#text(fill: BaseColorA(theme), sec.body) ] ]
+        }
+      }
+
+      set enum(numbering: n => {
+        if secs.map(x => x.body).at(int(n) - 1) == current-sec {
+          text(fill: theme.TitleFontColor, [#str(n)])
+        } else {
+          text(fill: BaseColorA(theme), [#str(n)])
+        }
+      })
+
+      // FIXME: can overflow horizontally
+      logic.polylux-slide[
+        #align(horizon)[
+          #for sec in secs {
+            render-section(sec)
+          }
+        ]
+      ]
+    },
   )
-  set text(fill: theme.TitleFontColor)
-
-  locate(loc => {
-    let secs = utils.sections-state.at(loc) // every entry has body and loc
-    let current-sec = title // utils.current-section
-
-    logic.polylux-slide[
-      #for sec in secs [ + #link(sec.loc)[#sec.body] ]
-      + #link(loc)[#text(fill: red, current-sec)]
-    ]
-  })
   // has to be down here due to state update bug
   utils.register-section(title)
 }

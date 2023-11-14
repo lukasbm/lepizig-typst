@@ -1,3 +1,6 @@
+#import "util.typ": *
+#import "components.typ": *
+
 #let styled-enum(theme) = body => {
   set enum(
     full: true,
@@ -25,22 +28,100 @@
   body
 }
 
-#let page-with-title-header(theme) = body => {
+#let page-with-title-header-and-background(theme) = body => {
+  set page(
+    background: {
+      set image(fit: "stretch", width: 100%, height: 100%)
+      theme.TitleBackground
+    },
+    margin: (
+      left: config.SideBarWidthLeft,
+      top: config.HeaderHeight + ascent * 2,
+      right: config.InnerRightMargin,
+      bottom: config.FootHeight + ascent,
+    ),
+    header: title-header(theme),
+    footer: none,
+    footer-descent: ascent,
+    header-ascent: ascent * 2,
+  )
+  set text(fill: theme.TitleFontColor)
+
   body
 }
 
-#let page-with-header(theme) = body => {
+#let page-with-title-header-and-fill(theme) = body => {
+  set page(
+    fill: theme.BaseColor,
+    margin: (
+      left: config.SideBarWidthLeft,
+      top: config.HeaderHeight + ascent * 2,
+      right: config.InnerRightMargin,
+      bottom: config.FootHeight + ascent,
+    ),
+    header: title-header(theme),
+    footer: none,
+    header-ascent: ascent * 2,
+    background: block(width: 100%, height: 100%, fill: theme.BaseColor),
+  )
+  set text(size: TitleFontSize, weight: "bold", fill: theme.TitleFontColor)
+
   body
 }
 
-#let page-with-header-and-footer(theme) = body => {
+#let page-with-header(theme, title, subtitle) = body => {
+  set page(
+    margin: (
+      left: config.SideBarWidthLeft,
+      top: config.HeaderHeight + ascent * 2,
+      right: config.InnerRightMargin,
+      bottom: ascent,
+    ),
+    header: header(title: title, subtitle: subtitle)(theme),
+    footer: none,
+    footer-descent: ascent,
+    header-ascent: ascent * 2,
+  )
+
   body
 }
 
-#let page-full-screen(theme) = body => {
+#let page-with-header-and-footer(theme, title, subtitle) = body => {
+  set page(
+    margin: (
+      left: config.SideBarWidthLeft,
+      top: config.HeaderHeight + ascent * 2,
+      right: config.InnerRightMargin,
+      bottom: config.FootHeight + ascent,
+    ),
+    header: header(title: title, subtitle: subtitle)(theme),
+    footer: footer(theme),
+    footer-descent: ascent,
+    header-ascent: ascent * 2,
+  )
+
   body
 }
 
 #let page-with-footer(theme) = body => {
+  set page(
+    margin: (
+      left: config.SideBarWidthLeft,
+      top: ascent * 2,
+      right: config.InnerRightMargin,
+      bottom: config.FootHeight + ascent,
+    ),
+    header: none,
+    footer: footer(theme),
+    footer-descent: ascent,
+    header-ascent: ascent * 2,
+  )
+
   body
 }
+
+#let page-full-screen(theme) = body => {
+  set page(margin: 0em, header: none, footer: none)
+  body
+}
+

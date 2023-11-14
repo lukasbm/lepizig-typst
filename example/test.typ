@@ -108,10 +108,9 @@
   / Term1: A terms element.
   / Term2: With some fancy words.
 
-  Inline `code` is also available.
-  ```bash
-  echo "and raw code blocks as well"
-  ```
+  Inline `code` is also available. ```bash
+            echo "and raw code blocks as well"
+            ```
 ]
 
 #slide(
@@ -154,9 +153,9 @@
     #align(horizon + center)[
       This is the area you can fill on a normal slide created with:
       ```typst
-      #slide(title: "Title")[
-      content
-      ]
+        #slide(title: "Title")[
+        content
+        ]
       ```
     ]
   ]
@@ -166,6 +165,11 @@
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
       more space
+      ```typst
+        #slide-plain(title: "Title")[
+        content
+        ]
+      ```
     ]
   ]
 ]
@@ -174,6 +178,11 @@
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
       even more space
+      ```typst
+        #slide-fullscreen(title: "Title")[
+        content
+        ]
+      ```
     ]
   ]
 ]
@@ -204,12 +213,11 @@
 
 #slide(title: "Citations")[
   #align(horizon)[
-    citation slide empty for now // This is a citation: @cite:example
+    This is a citation: @bungert2021bregman
   ]
-]
 
-// FIXME: styling is broken by this point ... due to set page overwrites ... need to scope them
-#references-slide
+  #bibliography("test.bib")
+]
 
 #section-slide("Presentation")
 

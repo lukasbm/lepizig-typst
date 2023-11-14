@@ -107,19 +107,11 @@
 }
 
 // Define different shades for BaseColor and BaseDarkColor
-
-// #let BaseColorA = #  {
-//   locate(loc => {
-//     let color = AllColors.at(state("institution").at(loc))
-//     color.BaseColor
-//   })
-// }
-
-// with-color(x => x.BaseColor.darken(62.5%))// #let BaseColorB = colors.at("BaseColor").darken(37.5%)
-// #let BaseColorC = colors.at("BaseColor").darken(25.0%)
-// #let BaseColorD = colors.at("BaseColor").darken(12.5%)
-
-// #let BaseDarkColorA = colors.BaseDarkColor.darken(62.5%)
-// #let BaseDarkColorB = colors.BaseDarkColor.darken(37.5%)
-// #let BaseDarkColorC = colors.BaseDarkColor.darken(25.0%)
-// #let BaseDarkColorD = colors.BaseDarkColor.darken(12.5%)
+#let BaseColorA(theme) = theme.BaseColor.lighten(100% - 62.5%)
+#let BaseColorB(theme) = theme.BaseColor.lighten(100% - 37.5%)
+#let BaseColorC(theme) = theme.BaseColor.lighten(100% - 25.0%)
+#let BaseColorD(theme) = theme.BaseColor.lighten(100% - 12.5%)
+#let BaseDarkColorA(theme) = theme.BaseDarkColor.lighten(100% - 62.5%)
+#let BaseDarkColorB(theme) = theme.BaseDarkColor.lighten(100% - 37.5%)
+#let BaseDarkColorC(theme) = theme.BaseDarkColor.lighten(100% - 25.0%)
+#let BaseDarkColorD(theme) = theme.BaseDarkColor.lighten(100% - 12.5%)

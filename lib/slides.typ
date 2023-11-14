@@ -112,45 +112,34 @@
 ]
 
 #let section-slide(title) = theme => {
+  set page(fill: theme.BaseColor)
+  set text(size: TitleFontSize, weight: "bold", fill: theme.TitleFontColor)
+  set page(
+    margin: (
+      left: config.SideBarWidthLeft,
+      top: config.HeaderHeight + ascent,
+      right: config.InnerRightMargin,
+      bottom: config.FootHeight + ascent,
+    ),
+    header: title-header(theme),
+    footer: none,
+    header-ascent: ascent * 2,
+    background: block(width: 100%, height: 100%, fill: theme.BaseColor),
+  )
+  set text(fill: theme.TitleFontColor)
 
-  // set page(fill: theme.BaseColor)
-  // set text(size: TitleFontSize, weight: "bold", fill: theme.TitleFontColor)
-  // set page(
-  //   margin: (
-  //     left: config.SideBarWidthLeft,
-  //     top: config.HeaderHeight + ascent,
-  //     right: config.InnerRightMargin,
-  //     bottom: config.FootHeight + ascent,
-  //   ),
-  //   header: title-header(theme),
-  //   footer: none,
-  //   header-ascent: ascent * 2,
-  //   background: block(width: 100%, height: 100%, fill: theme.BaseColor),
-  // )
-  // set text(fill: theme.TitleFontColor)
+  // return
 
-  // utils.register-section(title)
+  // FIXME: all the links are broken!
+  locate(loc => {
+    let secs = utils.sections-state.at(loc) // every entry has body and loc
+    let current-sec = title // utils.current-section
 
-  slide(title: title)[
-    TODO #title content slide
-  ](theme)
-
-  // locate(loc => {
-  //   let secs = utils.sections-state.final(loc)
-  //   let current-sec = utils.current-section
-  //   // show rule to highligh current section (maybe have to use regex)
-  //   // show current-sec: set text(fill: red)
-  //   // renders the a sections (highlighted if current-section)
-  //   let section-entry(sec) = {
-  //     if sec == current-sec {
-  //       set text(fill: red)
-  //     }
-  //     [ + #sec ]
-  //   }
-  //   slide(title: title)[
-  //     #for sec in secs {
-  //       section-entry(sec.body) // TODO: turn into a link with sec.loc
-  //     }
-  //   ]
-  // })
+    logic.polylux-slide[
+      #for sec in secs [ + #link(sec.loc)[#sec.body] ]
+      + #link(loc)[#text(fill: red, current-sec)]
+    ]
+  })
+  // has to be down here due to state update bug
+  utils.register-section(title)
 }

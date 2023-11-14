@@ -24,21 +24,24 @@
 
 #let title-header = theme => {
   //  FIXME: layout/alignment by using grid or columns ...
-  grid(
-    columns: (auto, 1fr, auto),
-    rows: (auto),
-    align(horizon + left)[
-      // Kennung
-      #set image(height: config.KennungHeight)
-      #theme.KennungWhite
-    ],
-    align(
-      horizon + right,
-    )[
-      // Logo
-      #set image(width: config.WordMarkTitleWidth, height: config.WordMarkTitleHeight)
-      #WortmarkeWhite
-    ],
+  v(1em)
+  align(
+    top,
+    grid(
+      columns: (auto, 1fr, auto),
+      align(horizon + left)[
+        // Kennung
+        #set image(height: config.KennungHeight)
+        #theme.KennungWhite
+      ],
+      align(
+        top + right,
+      )[
+        // Logo
+        #set image(width: config.WordMarkTitleWidth, height: config.WordMarkTitleHeight)
+        #WortmarkeWhite
+      ],
+    ),
   )
 
   // line
@@ -50,11 +53,12 @@
 }
 
 #let header(title: none, subtitle: none) = theme => {
-  grid(
+  v(1em)
+  align(top, grid(
     columns: (70%, 1fr, auto),
     row-gutter: 0pt,
     column-gutter: 1em,
-    align(left)[
+    align(top + left)[
       // title + subtitle
       #set align(top + left)
       #show text: set block(above: 0em, below: 0em)
@@ -72,7 +76,7 @@
       #set image(width: config.WordMarkWidth, height: config.WordMarkHeight)
       #WortmarkeBlue
     ],
-  )
+  ))
 
   // line
   show line: set block(above: 0em, below: 0mm)

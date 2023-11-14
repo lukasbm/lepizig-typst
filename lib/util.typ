@@ -38,7 +38,7 @@
 #let config16by9 = (
   // outer
   SideBarWidthLeft: 14.4mm,
-  HeaderHeight: 3em,
+  HeaderHeight: 4.5em,
   HeaderTitleHeight: 4mm,
   TitleHeight: 33mm,
   TitleLineHeight: 10mm,

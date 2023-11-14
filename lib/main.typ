@@ -13,11 +13,8 @@
   short-author: none,
   short-date: none,
   short-organization: none,
-  institution: "FAU",
   body,
 ) = {
-  let theme = AllThemes.at(institution)
-
   // global style setup
   set page(paper: "presentation-" + aspect-ratio)
   set text(font: FontFamily, size: TextFontSize)

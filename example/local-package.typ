@@ -1,5 +1,5 @@
 #import "@preview/polylux:0.3.1": *
-#import "@local/fau-typst:0.0.1": fau-theme
+#import "@local/fau-typst:0.0.1": fau-theme, main
 #import fau-theme: *
 
 #show: main.fau-theme.with(

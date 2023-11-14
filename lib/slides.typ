@@ -105,50 +105,52 @@
   logic.polylux-slide(body)
 }
 
-#let references-slide = theme => slide(title: "References")[
+#let references-slide = slide(title: "References")[
   TODO reference slide! // #fau-block(title: "References")[
   //   #bibliography
   // ]
-](theme)
+]
 
 #let section-slide(title) = theme => {
-  utils.register-section(title)
 
-  set page(fill: theme.BaseColor)
-  set text(size: TitleFontSize, weight: "bold", fill: theme.TitleFontColor)
-  set page(
-    margin: (
-      left: config.SideBarWidthLeft,
-      top: config.HeaderHeight + ascent,
-      right: config.InnerRightMargin,
-      bottom: config.FootHeight + ascent,
-    ),
-    header: title-header,
-    footer: none,
-    header-ascent: ascent * 2,
-    background: block(width: 100%, height: 100%, fill: theme.BaseColor),
-  )
-  set text(fill: theme.TitleFontColor)
+  // set page(fill: theme.BaseColor)
+  // set text(size: TitleFontSize, weight: "bold", fill: theme.TitleFontColor)
+  // set page(
+  //   margin: (
+  //     left: config.SideBarWidthLeft,
+  //     top: config.HeaderHeight + ascent,
+  //     right: config.InnerRightMargin,
+  //     bottom: config.FootHeight + ascent,
+  //   ),
+  //   header: title-header(theme),
+  //   footer: none,
+  //   header-ascent: ascent * 2,
+  //   background: block(width: 100%, height: 100%, fill: theme.BaseColor),
+  // )
+  // set text(fill: theme.TitleFontColor)
 
-  locate(loc => {
-    let secs = utils.sections-state.final(loc)
-    let current-sec = utils.current-section
+  // utils.register-section(title)
 
-    // show rule to highligh current section (maybe have to use regex)
-    // show current-sec: set text(fill: red)
+  slide(title: title)[
+    TODO #title content slide
+  ](theme)
 
-    // renders the a sections (highlighted if current-section)
-    let section-entry(sec) = {
-      if sec == current-sec {
-        set text(fill: red)
-      }
-      [ + #sec ]
-    }
-
-    slide(title: title)[
-      #for sec in secs {
-        section-entry(sec.body) // TODO: turn into a link with sec.loc
-      }
-    ]
-  })
+  // locate(loc => {
+  //   let secs = utils.sections-state.final(loc)
+  //   let current-sec = utils.current-section
+  //   // show rule to highligh current section (maybe have to use regex)
+  //   // show current-sec: set text(fill: red)
+  //   // renders the a sections (highlighted if current-section)
+  //   let section-entry(sec) = {
+  //     if sec == current-sec {
+  //       set text(fill: red)
+  //     }
+  //     [ + #sec ]
+  //   }
+  //   slide(title: title)[
+  //     #for sec in secs {
+  //       section-entry(sec.body) // TODO: turn into a link with sec.loc
+  //     }
+  //   ]
+  // })
 }

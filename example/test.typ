@@ -1,12 +1,12 @@
 #import "@preview/polylux:0.3.1": *
-#import "../lib/main.typ": *
+#import "../fau-typst.typ": fau-theme, main
+#import fau-theme: *
 
-#show: fau-theme.with(
+#show: main.fau-theme.with(
   short-author: "Lukas Böhm",
   short-title: "Test Document",
   short-date: datetime.today(),
   short-organization: "Lab1",
-  institution: "Nat",
 )
 
 #polylux-slide[
@@ -73,23 +73,17 @@
 #slide(title: "Blocks")[
   A block is a container for content, it can have a title and any content.
 
-  #let fau-block-themed(..args) = fau-block(..args)(ThemeNat)
-
   #fau-block(title: "Block Header")[
-    Block content
-  ](ThemeFAU)
-
-  #fau-block-themed(title: "asdasdas")[
     Block content
   ]
 
   Use any environment (like grid) to shape and align blocks.
 
-  // #grid(columns: (1fr, 1fr), gutter: 2em, fau-block()[
-  //   smaller block (no title)
-  // ], fau-block(title: "hey there")[
-  //   smaller block (with title)
-  // ])
+  #grid(columns: (1fr, 1fr), gutter: 2em, fau-block()[
+    smaller block (no title)
+  ], fau-block(title: "hey there")[
+    smaller block (with title)
+  ])
 ]
 
 #slide(
@@ -114,9 +108,10 @@
   / Term1: A terms element.
   / Term2: With some fancy words.
 
-  Inline `code` is also available. ```bash
-    echo "and raw code blocks as well"
-    ```
+  Inline `code` is also available.
+  ```bash
+  echo "and raw code blocks as well"
+  ```
 ]
 
 #slide(
@@ -157,11 +152,12 @@
 #slide(title: "Normal Slide", subtitle: "With normal dimensions")[
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
-      This is the area you can fill on a normal slide created with: ```typst
-            #slide(title: "Title")[
-            content
-            ]
-            ```
+      This is the area you can fill on a normal slide created with:
+      ```typst
+      #slide(title: "Title")[
+      content
+      ]
+      ```
     ]
   ]
 ]
@@ -213,7 +209,7 @@
 ]
 
 // FIXME: styling is broken by this point ... due to set page overwrites ... need to scope them
-// #references
+#references-slide
 
 #section-slide("Presentation")
 

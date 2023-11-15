@@ -62,9 +62,9 @@
     header: title-header(theme),
     footer: none,
     header-ascent: ascent * 2,
-    background: block(width: 100%, height: 100%, fill: theme.BaseColor),
+    footer-descent: ascent,
   )
-  set text(size: TitleFontSize, weight: "bold", fill: theme.TitleFontColor)
+  set text(fill: theme.TitleFontColor)
 
   body
 }

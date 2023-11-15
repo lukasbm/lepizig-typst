@@ -36,6 +36,9 @@
 }
 
 #let config16by9 = (
+  // skips
+  TitleSkip: 5mm, // distance left empty on top of header
+  FooterSkip: 3mm,
   // margins
   MarginLeft: 14.4mm,
   MarginRight: 3.5mm,

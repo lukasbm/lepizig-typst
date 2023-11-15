@@ -1,6 +1,6 @@
 #import "@preview/polylux:0.3.1": *
-#import "../fau-typst.typ": tech-theme, main
-#import tech-theme: *
+#import "../fau-typst.typ": rw-theme, main
+#import rw-theme: *
 
 #show: main.fau-theme.with(
   aspect-ratio: "16-9",
@@ -91,7 +91,6 @@
 
 #slide(
   title: "A very very very very very very very very very very long title",
-  subtitle: "this should be hidden",
 )[
   This is a slide with a very long title, it should be wrapped to the next line
   and the subtitle should be hidden.

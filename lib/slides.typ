@@ -29,7 +29,7 @@
     // FIXME: this can overflow horizontally
     stack(dir: ltr, spacing: 1cm, ..authors.map(author =>{
       assert("name" in author)
-      text(weight: "bold", size: TextFontSize, if "email" in author {
+      text(weight: "bold", if "email" in author {
         link("mailto:" + author.email, author.name)
       } else {
         author.name
@@ -45,6 +45,7 @@
 
   // needs to be here because of: https://github.com/typst/typst/issues/1467#issuecomment-1588684304
   show footnote.entry: set text(fill: theme.TitleFontColor)
+  set footnote.entry(separator: line(length: 30%, stroke: config.LineWidthThin + theme.TitleFontColor))
   show footnote: set text(fill: theme.TitleFontColor)
   show: page-with-title-header-and-background(theme)
   logic.polylux-slide(content)
@@ -92,6 +93,7 @@
         }
       }
 
+      // styling of the section numbers
       set enum(numbering: n => {
         if secs.map(x => x.body).at(int(n) - 1) == current-sec {
           text(fill: theme.TitleFontColor, [#str(n)])
@@ -100,7 +102,8 @@
         }
       })
 
-      // FIXME: can overflow horizontally
+      // FIXME: can overflow horizontally (use scaling if more than ~8 sections)
+      set text(size: TitleFontSize, weight: "bold")
       logic.polylux-slide[
         #align(horizon)[
           #for sec in secs {

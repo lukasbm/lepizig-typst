@@ -23,25 +23,22 @@
 }
 
 #let title-header = theme => {
-  //  FIXME: layout/alignment by using grid or columns ...
-  v(1em)
-  align(
-    top,
-    grid(
-      columns: (auto, 1fr, auto),
-      align(horizon + left)[
-        // Kennung
-        #set image(height: config.KennungHeight)
-        #theme.KennungWhite
-      ],
-      align(
-        top + right,
-      )[
-        // Logo
-        #set image(width: config.WordMarkTitleWidth, height: config.WordMarkTitleHeight)
-        #WortmarkeWhite
-      ],
-    ),
+  // kennung and wortmarke
+  grid(
+    columns: (1fr, config.WordMarkBoxWidth),
+    column-gutter: config.WordMarkSkip,
+    rows: config.HeaderHeight,
+    align(horizon + left)[
+      #set image(height: config.KennungHeight)
+      #theme.KennungWhite
+    ],
+    align(
+      top + right,
+    )[
+      // Logo
+      #set image(width: config.WordMarkTitleWidth, height: config.WordMarkTitleHeight)
+      #pad(y: 10pt, x: 5pt, WortmarkeWhite)
+    ],
   )
 
   // line
@@ -53,14 +50,13 @@
 }
 
 #let header(title: none, subtitle: none) = theme => {
-  v(1em)
-  align(top, grid(
-    columns: (70%, 1fr, auto),
-    row-gutter: 0pt,
-    column-gutter: 1em,
+  // title, subtitle and wortmarke
+  grid(
+    columns: (1fr, config.WordMarkBoxWidth),
+    column-gutter: config.WordMarkSkip,
+    rows: config.HeaderHeight,
     align(top + left)[
-      // title + subtitle
-      #set align(top + left)
+      #v(config.TitleSkip)
       #show text: set block(above: 0em, below: 0em)
       #if title != none {
         text(size: TitleFontSize, weight: "bold", fill: theme.BaseColor, title)
@@ -70,13 +66,12 @@
         text(size: SecondFontSize, fill: theme.BaseColor, subtitle)
       }
     ],
-    [],
     align(top + right)[
       // Logo
       #set image(width: config.WordMarkWidth, height: config.WordMarkHeight)
-      #WortmarkeBlue
+      #pad(y: 10pt, x: 5pt, WortmarkeBlue)
     ],
-  ))
+  )
 
   // line
   show line: set block(above: 0em, below: 0mm)

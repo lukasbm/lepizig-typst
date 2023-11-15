@@ -32,8 +32,28 @@
 
 #section-slide("The Basics")
 
-#slide(title: "Introduction", subtitle: "What is this?")[
+#slide(
+  title: "Introduction",
+  subtitle: "What is this?",
+)[
   This file demonstrates the usage of the FAU theme for typst.
+
+  You can simply start by importing the theme for your institution (RW, Phil, Med,
+  Tech, Nat, FAU) and then use the `#fau-theme` function to set it up:
+
+  ```typst
+    #import "@preview/polylux:0.3.1": *
+    #import "../fau-typst.typ": nat-theme, main
+    #import nat-theme: *
+
+    #show: main.fau-theme.with(
+      short-author: "Lukas Böhm",
+      short-title: "Test Document",
+      short-date: datetime.today(),
+      short-organization: "Lab1",
+    )
+    ```
+
 ]
 
 #slide(
@@ -111,15 +131,15 @@
   / Term2: With some fancy words.
 
   Inline `code` is also available. ```bash
-                              echo "and raw code blocks as well"
-                              ```
+                                  echo "and raw code blocks as well"
+                                  ```
 ]
 
 #slide(
   title: "Graphics",
 )[
   #import "../lib/colors.typ": WortmarkeBlue
-  #figure(image(WortmarkeBlue.path, width: 75%), caption: "This is a caption") <fig:logo>
+  #figure(image(WortmarkeBlue.path, height: 75%), caption: "This is a caption") <fig:logo>
 
   The image @fig:logo is a figure with a caption.
 ]
@@ -193,10 +213,10 @@
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
       This is the area you can fill on a normal slide created with: ```typst
-                                                              #slide(title: "Title")[
-                                                              content
-                                                              ]
-                                                            ```
+                                                                          #slide(title: "Title")[
+                                                                          content
+                                                                          ]
+                                                                        ```
     ]
   ]
 ]
@@ -205,10 +225,10 @@
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
       more space ```typst
-              #slide-plain(title: "Title")[
-              content
-              ]
-            ```
+                          #slide-plain(title: "Title")[
+                          content
+                          ]
+                        ```
     ]
   ]
 ]
@@ -217,10 +237,10 @@
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
       even more space ```typst
-      #slide-fullscreen(title: "Title")[
-        content
-      ]
-      ```
+                  #slide-fullscreen(title: "Title")[
+                    content
+                  ]
+                  ```
     ]
   ]
 ]
@@ -261,6 +281,21 @@
 
 #section-slide("Presentation")
 
-#slide(title: "Notes and `pdfpc`")[
-  TODO: explain how to use notes and pdfpc
+#slide(
+  title: "Notes and pdfpc",
+)[
+  The presentation can be exported to pdf and used with #link("https://pdfpc.github.io/")[pdfpc] to
+  present it. Pdfpc is a presenter console with multi-monitor support, allowing
+  you to have presenter specific tools like laser-pointer, notes and a timer on a
+  second screen.
+
+  By using the special `#pdfpc.speaker-note(body)` function from polylux you can
+  add notes to your slides that will only be visible to the presenter.
+  #pdfpc.speaker-note("This is a note only the speaker will see")
+
+  The body can be regular text as well as raw Markdown.
+
+  Take a look at the #link(
+    "https://andreaskroepelin.github.io/polylux/book/external/pdfpc.html",
+  )[polylux documentation] for more information.
 ]

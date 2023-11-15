@@ -1,6 +1,12 @@
 #import "util.typ": *
 #import "components.typ": *
 
+#let styled-link(theme) = body => {
+  show link: set text(fill: theme.BaseColor)
+
+  body
+}
+
 #let styled-enum(theme) = body => {
   set enum(
     full: true,

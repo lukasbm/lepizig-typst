@@ -56,6 +56,7 @@
   show: styled-enum(theme)
   show: styled-terms(theme)
   show: styled-list(theme)
+  show: styled-link(theme)
   logic.polylux-slide(body)
 }
 

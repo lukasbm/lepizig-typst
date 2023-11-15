@@ -11,7 +11,7 @@ This might be important for developers
 
 ## Develop
 
-`cd example && typst watch --root .. --font-path ./fonts/ test.typ test.pdf`
+`cd example && typst watch --root .. --font-path ./fonts/ showcase.typ showcase.pdf`
 
 ## Helper: convert all pdfs to svgs
 

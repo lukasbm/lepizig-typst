@@ -35,10 +35,10 @@
       theme.TitleBackground
     },
     margin: (
-      left: config.SideBarWidthLeft,
+      left: config.MarginLeft,
       top: config.HeaderHeight + ascent * 2,
-      right: config.InnerRightMargin,
-      bottom: config.FootHeight + ascent,
+      right: config.MarginRight,
+      bottom: config.FooterHeight + ascent,
     ),
     header: title-header(theme),
     footer: none,
@@ -54,10 +54,10 @@
   set page(
     fill: theme.BaseColor,
     margin: (
-      left: config.SideBarWidthLeft,
+      left: config.MarginLeft,
       top: config.HeaderHeight + ascent * 2,
-      right: config.InnerRightMargin,
-      bottom: config.FootHeight + ascent,
+      right: config.MarginRight,
+      bottom: config.FooterHeight + ascent,
     ),
     header: title-header(theme),
     footer: none,
@@ -72,9 +72,9 @@
 #let page-with-header(theme, title, subtitle) = body => {
   set page(
     margin: (
-      left: config.SideBarWidthLeft,
+      left: config.MarginLeft,
       top: config.HeaderHeight + ascent * 2,
-      right: config.InnerRightMargin,
+      right: config.MarginRight,
       bottom: ascent,
     ),
     header: header(title: title, subtitle: subtitle)(theme),
@@ -89,10 +89,10 @@
 #let page-with-header-and-footer(theme, title, subtitle) = body => {
   set page(
     margin: (
-      left: config.SideBarWidthLeft,
+      left: config.MarginLeft,
       top: config.HeaderHeight + ascent * 2,
-      right: config.InnerRightMargin,
-      bottom: config.FootHeight + ascent,
+      right: config.MarginRight,
+      bottom: config.FooterHeight + ascent,
     ),
     header: header(title: title, subtitle: subtitle)(theme),
     footer: footer(theme),
@@ -106,10 +106,10 @@
 #let page-with-footer(theme) = body => {
   set page(
     margin: (
-      left: config.SideBarWidthLeft,
+      left: config.MarginLeft,
       top: ascent * 2,
-      right: config.InnerRightMargin,
-      bottom: config.FootHeight + ascent,
+      right: config.MarginRight,
+      bottom: config.FooterHeight + ascent,
     ),
     header: none,
     footer: footer(theme),

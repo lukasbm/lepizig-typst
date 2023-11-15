@@ -36,64 +36,25 @@
 }
 
 #let config16by9 = (
-  SideBarWidthLeft: 14.4mm,
+  // margins
+  MarginLeft: 14.4mm,
+  MarginRight: 3.5mm,
   HeaderHeight: 4.5em,
-  HeaderTitleHeight: 4mm,
-  TitleHeight: 33mm,
-  TitleLineHeight: 10mm,
-  TitleTitleSkip: 3.5mm,
-  TitleSkip: 5mm,
-  TitleSkipLeft: 5.5mm,
+  FooterHeight: 9mm,
+  // separator line
   LineWidthThick: 2mm,
   LineWidthThin: .5mm,
-  FootHeight: 9mm,
-  FootLineSkip: 3mm,
-  WordMarkHeight: 17mm,
-  WordMarkWidth: 34mm,
-  WordMarkTitleHeight: 25.4mm,
-  WordMarkTitleWidth: 50.2mm,
-  WordMarkLeftHeight: 12mm,
-  WordMarkLeftWidth: 74mm,
-  WordMarkBoxWidth: 60mm,
-  WordMarkSkip: 12mm,
+  // wortmarke logo
+  WordMarkTitleHeight: 25.4mm, // height if placed in title
+  WordMarkTitleWidth: 50.2mm, // width if placed in title
+  WordMarkHeight: 17mm, // regular height
+  WordMarkWidth: 34mm, //regular width
+  WordMarkLeftHeight: 12mm, // height if placed left
+  WordMarkLeftWidth: 74mm, // width if placed left
+  WordMarkBoxWidth: 60mm, // width reserved for wordmark
+  WordMarkSkip: 12mm, // gutter before wordmark space
+  // kennung
   KennungHeight: 18mm,
-  InnerTitleTitleSkip: 3.5mm,
-  InnerWordMarkTitleHeight: 21.9mm,
-  InnerWordMarkTitleWidth: 55.2mm,
-  InnerHeaderHeight: 3em,
-  InnerTitleHeight: 30mm,
-  InnerTitleLineHeight: 10mm,
-  InnerRightMargin: 3.5mm,
-)
-
-#let config4by3 = (
-  SideBarWidthLeft: 10.8mm,
-  HeaderHeight: 5mm,
-  HeaderTitleHeight: 4mm,
-  TitleHeight: 30mm,
-  TitleLineHeight: 10mm,
-  TitleTitleSkip: 3.5mm,
-  TitleSkip: 2.5mm,
-  TitleSkipLeft: 4.5mm,
-  LineWidthThick: 2mm,
-  LineWidthThin: .5mm,
-  FootHeight: 9mm,
-  FootLineSkip: 3mm,
-  WordMarkHeight: 12.6mm,
-  WordMarkWidth: 24.5mm,
-  WordMarkTitleHeight: 21.9mm,
-  WordMarkTitleWidth: 40.0mm,
-  WordMarkLeftHeight: 12mm,
-  WordMarkLeftWidth: 50mm,
-  WordMarkBoxWidth: 60mm,
-  WordMarkSkip: 12mm,
-  InnerTitleTitleSkip: 3.5mm,
-  InnerWordMarkTitleHeight: 25.4mm,
-  InnerWordMarkTitleWidth: 46.0mm,
-  InnerHeaderHeight: 5mm,
-  InnerTitleHeight: 30mm,
-  InnerTitleLineHeight: 10mm,
-  InnerRightMargin: 3.5mm,
 )
 
 #let config = config16by9

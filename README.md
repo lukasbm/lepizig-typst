@@ -5,7 +5,7 @@ Inspired by [FAU beamer](https://github.com/FAU-AMMN/fau-beamer)
 
 ## :gear: Prerequisites
 
-- `FAUSans Office` font family installed
+- [`FAUSans Office` font family](https://www.intern.fau.de/kommunikation-und-marke/corporate-design/fau-schrift/) installed
 - `typst >= 0.9.0` compiler installed
 - `git` and `python3` installed 
 
@@ -66,15 +66,15 @@ Write your first presentation. For example like this:
 
 ```
 
-## Examples
+## :sparkles: Examples
 
 While more extensive documentation is in the works,
 take a look at the [example directory](./example/) to get a better indication of how to use this template.
 
-## :memo: More Information
+## :bulb: More Information
 
 For more information, take a look at the [Developer Guide](./DEVELOPER.md)
 
-## License
+## :page_facing_up: License
 
 TODO

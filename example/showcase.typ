@@ -1,6 +1,6 @@
 #import "@preview/polylux:0.3.1": *
-#import "../fau-typst.typ": rw-theme, main
-#import rw-theme: *
+#import "../fau-typst.typ": fau-theme, main
+#import fau-theme: *
 
 #show: main.fau-theme.with(
   aspect-ratio: "16-9",
@@ -111,8 +111,8 @@
   / Term2: With some fancy words.
 
   Inline `code` is also available. ```bash
-                            echo "and raw code blocks as well"
-                            ```
+                              echo "and raw code blocks as well"
+                              ```
 ]
 
 #slide(
@@ -185,7 +185,6 @@
     rect(width: box-size, height: box-size, fill: BaseDarkColorD),
     `BaseDarkColorD`,
   ))
-
 ]
 
 #section-slide("Slide Environments")
@@ -194,10 +193,10 @@
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
       This is the area you can fill on a normal slide created with: ```typst
-                                                        #slide(title: "Title")[
-                                                        content
-                                                        ]
-                                                      ```
+                                                              #slide(title: "Title")[
+                                                              content
+                                                              ]
+                                                            ```
     ]
   ]
 ]
@@ -206,10 +205,10 @@
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
       more space ```typst
-                                                        #slide-plain(title: "Title")[
-                                                        content
-                                                        ]
-                                                      ```
+              #slide-plain(title: "Title")[
+              content
+              ]
+            ```
     ]
   ]
 ]
@@ -218,10 +217,10 @@
   #box(width: 100%, height: 100%, fill: luma(75%))[
     #align(horizon + center)[
       even more space ```typst
-                                                        #slide-fullscreen(title: "Title")[
-                                                        content
-                                                        ]
-                                                      ```
+      #slide-fullscreen(title: "Title")[
+        content
+      ]
+      ```
     ]
   ]
 ]
@@ -250,10 +249,12 @@
 
 #section-slide("Citations")
 
-#slide(title: "Citations")[
+#slide(title: "Citations", subtitle: "And footnotes!")[
   #align(horizon)[
     This is a citation: @bungert2021bregman
   ]
+
+  You can just as easily add footnotes #footnote("hey there!").
 
   #bibliography("test.bib")
 ]

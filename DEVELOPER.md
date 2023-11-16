@@ -37,3 +37,14 @@ This might be important for developers
 - FAU Sans (kommerzielle Lizenz, nur für interne Zwecke)
 - FAU Sans Office (kommerzielle Lizenz, nur für interne Zwecke)
 
+## Extending the Template
+
+### Custom Slide Types
+
+You can easily create new custom slide types for any purpose.
+
+When doing so, please be careful of the following key points:
+- only call `logic.polylux-slide` and not some other slide function like `section-slide` to avoid clashing and broken styles
+- you can avoid repetition by extracting the styling into separate functions as shown in `lib/styles.typ`
+- extract common components (such as header, footer or sidebar) into it's own function as shown in `lib/components.typ`
+- For actual implementation examples see the source of `lib/slides.typ`

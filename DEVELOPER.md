@@ -4,7 +4,7 @@ This might be important for developers
 
 ## Relevant Issues
 
-- [double line spacing[](https://github.com/typst/typst/issues/106)
+- [double line spacing](https://github.com/typst/typst/issues/106)
 - [restore layout](https://github.com/typst/typst/issues/361)
 - [restore layout](https://github.com/typst/typst/issues/420)
 
@@ -13,8 +13,10 @@ This might be important for developers
 
 `cd example && typst watch --root .. --font-path ./fonts/ showcase.typ showcase.pdf`
 
-## Helper: convert all pdfs to svgs
+## Helper: Convert all pdfs to svgs
 
+Typst does not support embeddings PDFs yet. You need to convert all of them to SVGs first.
+The following command will help you do this:
 `find . -type f -name "*.pdf" -exec sh -c 'pdf2svg "$0" "${0%.pdf}.svg"' {} \;`
 
 ## Sources
@@ -27,17 +29,7 @@ This might be important for developers
 
 ### Fonts
 
-- Roboto Bild
-- Roboto Bold Italic
-- Roboto Italic
-- Roboto Light
-- Roboto Regular
-- FAU Chimera (freie Apache Lizenz)
-- Roboto (freie Apache Lizenz)
-- FAU Sans (kommerzielle Lizenz, nur für interne Zwecke)
 - FAU Sans Office (kommerzielle Lizenz, nur für interne Zwecke)
-
-## Extending the Template
 
 ### Custom Slide Types
 

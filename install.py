@@ -6,10 +6,6 @@ from shutil import copyfile, copytree, ignore_patterns, copy, rmtree
 # source: https://github.com/typst/packages#local-packages
 
 
-def enter_git_root() -> None:
-    pass  # TODO: implement cross platform version of this!
-
-
 def determine_data_dir() -> str:
     if platform.system().lower() == "linux":
         return os.path.join(os.environ["HOME"], ".local", "share")
@@ -59,8 +55,6 @@ def copy_files(source_dir: str, target_dir: str) -> None:
 
 
 if __name__ == "__main__":
-    enter_git_root()
-
     name = ""
     version = ""
     with open("typst.toml", "rb") as f:
@@ -68,10 +62,8 @@ if __name__ == "__main__":
         name = toml["package"]["name"]
         version = toml["package"]["version"]
 
-    data_dir = determine_data_dir()
-
     # copy files
     copy_files(
         source_dir=os.getcwd(),
-        target_dir=os.path.join(data_dir, "typst", "packages", "local", name, version)
+        target_dir=os.path.join(determine_data_dir(), "typst", "packages", "local", name, version)
     )

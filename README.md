@@ -17,6 +17,7 @@ However you can easily install it locally as follows:
 ```bash
 git clone git@github.com:lukasbm/fau-typst.git
 cd fau-typst
+# make sure you execute the python script from the project root!
 python3 install.py  # run the cross-platform install script (just copies the source files to the right location)
 ```
 

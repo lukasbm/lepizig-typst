@@ -23,6 +23,8 @@ python3 install.py  # run the cross-platform install script (just copies the sou
 
 ## :rocket: Usage
 
+After installing the dependencies (Fonts, git, Typst compiler) and the local package (using the python script),
+you can start writing your own documents.
 The default setup will look like this:
 ```typst
 #import "@preview/polylux:0.3.1": *
@@ -37,7 +39,6 @@ The default setup will look like this:
   short-organization: "Lab1",
   institution: "FAU",
 )
-
 ```
 Where `<institution>` can be replaced with either: `fau`, `nat`, `phil`, `rw`, `tech`, `med`.
 Just changing the import statement will update the entire theme.
@@ -71,6 +72,7 @@ Write your first presentation. For example like this:
 
 While more extensive documentation is in the works,
 take a look at the [example directory](./example/) to get a better indication of how to use this template.
+
 
 ## :bulb: More Information
 

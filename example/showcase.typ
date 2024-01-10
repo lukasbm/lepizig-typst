@@ -2,7 +2,7 @@
 #import "../fau-typst.typ": fau-theme, main
 #import fau-theme: *
 
-#show: main.fau-theme.with(
+#show: main.setup-theme.with(
   aspect-ratio: "16-9",
   short-author: "Lukas Böhm",
   short-title: "Test Document",
@@ -39,14 +39,14 @@
   This file demonstrates the usage of the FAU theme for typst.
 
   You can simply start by importing the theme for your institution (RW, Phil, Med,
-  Tech, Nat, FAU) and then use the `#fau-theme` function to set it up:
+  Tech, Nat, FAU) and then use the `#setup-theme` function to set it up:
 
   ```typst
     #import "@preview/polylux:0.3.1": *
     #import "../fau-typst.typ": nat-theme, main
     #import nat-theme: *
 
-    #show: main.fau-theme.with(
+    #show: main.setup-theme.with(
       short-author: "Lukas Böhm",
       short-title: "Test Document",
       short-date: datetime.today(),

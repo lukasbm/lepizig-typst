@@ -2,7 +2,7 @@
 #import "@local/fau-typst:0.0.1": fau-theme, main
 #import fau-theme: *
 
-#show: main.fau-theme.with(
+#show: main.setup-theme.with(
   short-author: "Lukas Böhm",
   short-title: "Test Document",
   short-date: datetime.today(),

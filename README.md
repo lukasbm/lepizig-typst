@@ -32,7 +32,7 @@ The default setup will look like this:
 #import <intitution>-theme: *  // import everything from the theme (slide types)
 
 // initialize the template with this function (important!)
-#show: main.fau-theme.with(
+#show: main.setup-theme.with(
   short-author: "Lukas Böhm",
   short-title: "Test Document",
   short-date: datetime.today(),

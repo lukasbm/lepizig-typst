@@ -8,7 +8,6 @@
   title: "Title",
   subtitle: none,
   authors: (),
-  institution: "FAU",
   date: datetime.today(),
 ) = theme => {
   let content = {

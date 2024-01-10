@@ -7,7 +7,7 @@
 #import "slides.typ": *
 #import "components.typ": *
 
-#let fau-theme(
+#let setup-theme(
   aspect-ratio: "16-9",
   short-title: none,
   short-author: none,

@@ -7,7 +7,6 @@
   short-title: "Test Document",
   short-date: datetime.today(),
   short-organization: "Lab1",
-  institution: "FAU",
 )
 
 #polylux-slide[

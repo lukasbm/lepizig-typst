@@ -145,6 +145,7 @@
 ]
 
 // TODO: slide showing off animations/overlays
+// hopefully this would work given this issue exists: https://github.com/andreasKroepelin/polylux/issues/128
 
 #section-slide("Color Palette")
 

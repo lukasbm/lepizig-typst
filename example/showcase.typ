@@ -1,6 +1,6 @@
 #import "@preview/polylux:0.3.1": *
-#import "../fau-typst.typ": fau-theme, main
-#import fau-theme: *
+#import "../fau-typst.typ": tech-theme, main
+#import tech-theme: *
 
 #show: main.setup-theme.with(
   aspect-ratio: "16-9",

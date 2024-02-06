@@ -8,7 +8,8 @@
   title: "Title",
   subtitle: none,
   authors: (),
-  date: datetime.today(),
+  date: datetime.today(), // FIXME: use the global date as default
+  body: none,
 ) = theme => {
   let content = {
     v(1.5cm)
@@ -40,11 +41,16 @@
 
     // date
     text(size: TextFontSize, date.display("[month repr:long] [day], [year]"))
+    linebreak()
+
+    body
   }
 
   // needs to be here because of: https://github.com/typst/typst/issues/1467#issuecomment-1588684304
   show footnote.entry: set text(fill: theme.TitleFontColor)
-  set footnote.entry(separator: line(length: 30%, stroke: config.LineWidthThin + theme.TitleFontColor))
+  set footnote.entry(
+    separator: line(length: 30%, stroke: config.LineWidthThin + theme.TitleFontColor),
+  )
   show footnote: set text(fill: theme.TitleFontColor)
   show: page-with-title-header-and-background(theme)
   logic.polylux-slide(content)

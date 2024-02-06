@@ -97,6 +97,7 @@
   "RW": ThemeRW,
 )
 
+// deprecated and unused
 #let with-theme(callback) = {
   locate(loc => {
     let institution = state("institution").final(loc)

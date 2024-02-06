@@ -4,7 +4,9 @@
 #import "@preview/polylux:0.3.1": logic, utils
 
 #let fau-block(title: none, body) = theme => {
-  let content = block(width: 100%, breakable: false, fill: luma(80%), inset: 5pt, body)
+  // FIXME: make the fill color of content dependent on the theme
+  // It should still be grayscale?
+  let content = block(width: 100%, breakable: false, fill: luma(95%), inset: 5pt, body)
 
   let header = if title != none {
     set text(theme.TitleFontColor, weight: "bold")

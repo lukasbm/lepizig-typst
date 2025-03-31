@@ -63,7 +63,10 @@ if __name__ == "__main__":
         version = toml["package"]["version"]
 
     # copy files
+    target_dir = os.path.join(determine_data_dir(), "typst", "packages", "local", name, version)
+    print("Copying files to", target_dir)
     copy_files(
         source_dir=os.getcwd(),
-        target_dir=os.path.join(determine_data_dir(), "typst", "packages", "local", name, version)
+        target_dir=target_dir
     )
+    print("Done.")

@@ -1,4 +1,4 @@
-#import "@preview/polylux:0.3.1": logic, utils
+#import "@preview/polylux:0.4.0": logic, utils
 
 #import "colors.typ": *
 #import "util.typ": *

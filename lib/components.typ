@@ -1,7 +1,7 @@
 #import "util.typ": *
 #import "fonts.typ": *
 #import "colors.typ": *
-#import "@preview/polylux:0.3.1": logic, utils
+#import "@preview/polylux:0.4.0": logic, utils
 
 #let fau-block(title: none, body) = theme => {
   // FIXME: make the fill color of content dependent on the theme

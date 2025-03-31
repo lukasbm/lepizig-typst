@@ -1,4 +1,4 @@
-#import "@preview/polylux:0.3.1": *
+#import "@preview/polylux:0.4.0": *
 #import "@local/fau-typst:0.0.1": fau-theme, main
 #import fau-theme: *
 

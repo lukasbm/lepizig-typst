@@ -1,4 +1,4 @@
-#import "@preview/polylux:0.3.1": *
+#import "@preview/polylux:0.4.0": *
 #import "../fau-typst.typ": tech-theme, main
 #import tech-theme: *
 
@@ -42,7 +42,7 @@
   Tech, Nat, FAU) and then use the `#setup-theme` function to set it up:
 
   ```typst
-    #import "@preview/polylux:0.3.1": *
+    #import "@preview/polylux:0.4.0": *
     #import "../fau-typst.typ": nat-theme, main
     #import nat-theme: *
 

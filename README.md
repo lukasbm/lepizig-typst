@@ -26,8 +26,9 @@ python3 install.py  # run the cross-platform install script (just copies the sou
 After installing the dependencies (Fonts, git, Typst compiler) and the local package (using the python script),
 you can start writing your own documents.
 The default setup will look like this:
+
 ```typst
-#import "@preview/polylux:0.3.1": *
+#import "@preview/polylux:0.4.0": *
 #import "@local/fau-typst:0.0.1": <institution>-theme, main
 #import <intitution>-theme: *  // import everything from the theme (slide types)
 

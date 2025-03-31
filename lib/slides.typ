@@ -1,7 +1,7 @@
 #import "components.typ": *
 #import "util.typ": *
 #import "fonts.typ": *
-#import "@preview/polylux:0.3.1": logic, utils
+#import "@preview/polylux:0.4.0": logic, utils
 #import "styles.typ": *
 
 #let title-slide(

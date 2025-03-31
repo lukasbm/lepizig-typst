@@ -82,3 +82,12 @@ For more information, take a look at the [Developer Guide](./DEVELOPER.md)
 ## :page_facing_up: License
 
 TODO
+
+## :lightning: Debugging
+
+### Polylux Error
+
+In case there are inexplicable compiler errors, try redownloading the dependency packages (polylux).
+First delete it from [the cache where it is saved](https://docs.rs/dirs/latest/dirs/fn.cache_dir.html).
+(e.g. `rm -rf ~/.cache/typst/packages/preview/polylux` on linux)
+Then try again

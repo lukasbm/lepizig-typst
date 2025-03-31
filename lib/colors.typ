@@ -97,16 +97,6 @@
   "RW": ThemeRW,
 )
 
-// deprecated and unused
-#let with-theme(callback) = {
-  locate(loc => {
-    let institution = state("institution").final(loc)
-    assert(institution != none)
-    let theme = AllThemes.at(institution)
-    callback(theme)
-  })
-}
-
 // Define different shades for BaseColor and BaseDarkColor
 #let BaseColorA(theme) = theme.BaseColor.lighten(100% - 62.5%)
 #let BaseColorB(theme) = theme.BaseColor.lighten(100% - 37.5%)

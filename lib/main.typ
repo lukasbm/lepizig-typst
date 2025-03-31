@@ -1,5 +1,3 @@
-#import "@preview/polylux:0.4.0": logic, utils
-
 #import "colors.typ": *
 #import "util.typ": *
 #import "fonts.typ": *
@@ -21,7 +19,7 @@
   // set block(spacing: 1em)
 
   // essentially disable level 1 headings
-  show heading.where(level: 1): it => {}
+  show heading.where(level: 1): it => {} // or just ": none"
 
   // state updates
   state-short-title.update(short-title)

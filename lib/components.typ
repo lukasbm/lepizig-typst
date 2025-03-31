@@ -1,7 +1,7 @@
 #import "util.typ": *
 #import "fonts.typ": *
 #import "colors.typ": *
-#import "@preview/polylux:0.4.0": logic, utils
+#import "@preview/polylux:0.4.0": toolbox
 
 #let fau-block(title: none, body) = theme => {
   // FIXME: make the fill color of content dependent on the theme
@@ -34,9 +34,7 @@
       #set image(height: config.KennungHeight)
       #theme.KennungWhite
     ],
-    align(
-      top + right,
-    )[
+    align(top + right)[
       // Logo
       #set image(width: config.WordMarkTitleWidth, height: config.WordMarkTitleHeight)
       #pad(y: 10pt, x: 5pt, WortmarkeWhite)
@@ -90,17 +88,16 @@
 
   // short texts
   set text(FooterFontSize)
-  let quad = 0.7cm;
-  text(state-short-organization.display());
-  h(quad);
-  text(state-short-author.display());
-  h(quad);
-  text(fill: theme.BaseColor, state-short-title.display());
-  h(1fr);
-  text(
-    state-short-date.display(dat => dat.display("[month repr:short] [day], [year]")),
-  );
-  h(quad);
-  text(logic.logical-slide.display() + [~/~] + utils.last-slide-number);
-  h(quad);
+  let quad = 0.7cm
+  context text(state-short-organization.get())
+  h(quad)
+  context text(state-short-author.get())
+  h(quad)
+  context text(fill: theme.BaseColor, state-short-title.get())
+  h(1fr)
+  context text(state-short-date.get().display("[month repr:short] [day], [year]"))
+  h(quad)
+  // FIXME: does this work???
+  text(toolbox.slide-number + [~/~] + toolbox.last-slide-number)
+  h(quad)
 }

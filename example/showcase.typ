@@ -1,5 +1,6 @@
-#import "@preview/polylux:0.4.0": *
+#import "@preview/polylux:0.4.0": toolbox
 #import "../fau-typst.typ": tech-theme, main
+// #import "@local/fau-typst:0.0.1": tech-theme, main
 #import tech-theme: *
 
 #show: main.setup-theme.with(
@@ -9,12 +10,6 @@
   short-date: datetime.today(),
   short-organization: "Lab1",
 )
-
-#polylux-slide[
-  need this (almost) empty slide at the beginngin due to a bug with state updates
-
-  This Issue will be resolved _hopefully_ soon.
-]
 
 #title-slide(
   title: "Test Document showing off the theme",
@@ -83,7 +78,7 @@
 
 #slide(title: "Side by Side", subtitle: "Organizing content on the slide")[
   #align(horizon + center)[
-    #side-by-side[
+    #toolbox.side-by-side[
       #lorem(7)
     ][
       #lorem(10)
@@ -139,7 +134,7 @@
   title: "Graphics",
 )[
   #import "../lib/colors.typ": WortmarkeBlue
-  #figure(image(WortmarkeBlue.path, height: 75%), caption: "This is a caption") <fig:logo>
+  #figure(image(WortmarkeBlue.source, height: 75%), caption: "This is a caption") <fig:logo>
 
   The image @fig:logo is a figure with a caption.
 ]
@@ -290,9 +285,10 @@
   you to have presenter specific tools like laser-pointer, notes and a timer on a
   second screen.
 
-  By using the special `#pdfpc.speaker-note(body)` function from polylux you can
+  By using the special `#toolbox.pdfpc.speaker-note(body)` function from polylux you can
   add notes to your slides that will only be visible to the presenter.
-  #pdfpc.speaker-note("This is a note only the speaker will see")
+  
+  #toolbox.pdfpc.speaker-note("This is a note only the speaker will see")
 
   The body can be regular text as well as raw Markdown.
 

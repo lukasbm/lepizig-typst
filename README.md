@@ -6,14 +6,15 @@ Inspired by [FAU beamer](https://github.com/FAU-AMMN/fau-beamer)
 ## :gear: Prerequisites
 
 - [`FAUSans Office` font family](https://www.intern.fau.de/kommunikation-und-marke/corporate-design/fau-schrift/) installed
-- `typst >= 0.9.0` compiler installed
-- `git` and `python3` installed 
+- `typst >= 0.12.0` compiler installed
+- `git` and `python3` installed
 
 ## :wrench: Installation
 
 This theme will not be published in the package repository of typst due to distribution restrictions.
 
 However you can easily install it locally as follows:
+
 ```bash
 git clone git@github.com:lukasbm/fau-typst.git
 cd fau-typst
@@ -41,6 +42,7 @@ The default setup will look like this:
   institution: "FAU",
 )
 ```
+
 Where `<institution>` can be replaced with either: `fau`, `nat`, `phil`, `rw`, `tech`, `med`.
 Just changing the import statement will update the entire theme.
 No need for more complicated settings!
@@ -66,14 +68,12 @@ Write your first presentation. For example like this:
 #slide(title: "Introduction", subtitle: "What is this?")[
   This file demonstrates the usage of the FAU theme for typst.
 ]
-
 ```
 
 ## :sparkles: Examples
 
 While more extensive documentation is in the works,
 take a look at the [example directory](./example/) to get a better indication of how to use this template.
-
 
 ## :bulb: More Information
 

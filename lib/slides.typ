@@ -106,28 +106,31 @@
   // actually render the section titles
   set text(size: TitleFontSize, weight: "bold")
 
-  let content = toolbox.all-sections((sections, current) => {
-    sections.map(s => if s == current {
-      // render the current section title
-      text(
-        fill: theme.TitleFontColor,
-        s.body,
-      )
-      // [+ #link(loc)[#text(fill: theme.TitleFontColor, current-sec)]]
-    } else {
-      // render the other section titles
-      text(
-        fill: BaseColorA(theme),
-        s.body,
-      )
-      // [+ #link(sec.loc)[#text(fill: BaseColorA(theme), sec.body) ]]
-    })
+  // TODO: turn into link!
+  let secs = toolbox.all-sections((sections, current) => {
+    sections
+      .map(s => if s == current {
+        // render the current section title
+        text(
+          fill: theme.TitleFontColor,
+          s,
+        )
+        // [+ #link(loc)[#text(fill: theme.TitleFontColor, current-sec)]]
+      } else {
+        // render the other section titles
+        text(
+          fill: BaseColorA(theme),
+          s.body,
+        )
+        // [+ #link(sec.loc)[#text(fill: BaseColorA(theme), sec.body) ]]
+      })
+      .join(linebreak())
   })
 
   // FIXME: can overflow horizontally (use scaling if more than ~8 sections)
   polylux-slide[
     #align(horizon)[
-      #content
+      #secs
     ]
   ]
 

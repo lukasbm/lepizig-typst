@@ -1,7 +1,7 @@
-#import "colors.typ": ThemeFAU
+#import "colors.typ": *
 
 //////////////////////
-// state stuff
+// state stuff (essentially a replacement for global vars)
 //////////////////////
 
 #let state-short-title = state("short-title", none)
@@ -9,16 +9,26 @@
 #let state-short-date = state("short-date", datetime.today())
 #let state-short-organization = state("short-organization", none)
 
-#let state-to-string(content) = {
-  if content.has("text") {
-    content.text
-  } else if content.has("children") {
-    content.children.map(to-string).join("")
-  } else if content.has("body") {
-    to-string(content.body)
-  } else if content == [ ] {
-    " "
-  }
+//////////////////////
+// shortcuts / commands
+//////////////////////
+
+#let LaTeX = {
+  [L]
+  box(move(dx: -4.2pt, dy: -1.2pt, box(scale(65%)[A])))
+  box(move(dx: -5.7pt, dy: 0pt, [T]))
+  box(move(dx: -7.0pt, dy: 2.7pt, box(scale(100%)[E])))
+  box(move(dx: -8.0pt, dy: 0pt, [X]))
+  h(-8.0pt)
+}
+
+#let TyPsT = {
+  [T]
+  box(move(dx: -4.2pt, dy: -1.2pt, box(scale(65%)[Y])))
+  box(move(dx: -5.7pt, dy: 0pt, [P]))
+  box(move(dx: -7.0pt, dy: 2.7pt, box(scale(100%)[S])))
+  box(move(dx: -8.0pt, dy: 0pt, [T]))
+  h(-8.0pt)
 }
 
 //////////////////////
@@ -26,14 +36,6 @@
 //////////////////////
 
 #let ascent = 2mm
-
-#let LaTeX = {
-  [L];box(move(dx: -4.2pt, dy: -1.2pt, box(scale(65%)[A])));box(move(dx: -5.7pt, dy: 0pt, [T]));box(move(dx: -7.0pt, dy: 2.7pt, box(scale(100%)[E])));box(move(dx: -8.0pt, dy: 0pt, [X]));h(-8.0pt)
-}
-
-#let TyPsT = {
-  [T];box(move(dx: -4.2pt, dy: -1.2pt, box(scale(65%)[Y])));box(move(dx: -5.7pt, dy: 0pt, [P]));box(move(dx: -7.0pt, dy: 2.7pt, box(scale(100%)[S])));box(move(dx: -8.0pt, dy: 0pt, [T]));h(-8.0pt)
-}
 
 #let config16by9 = (
   // skips
@@ -59,5 +61,7 @@
   // kennung
   KennungHeight: 18mm,
 )
+
+// TODO: 4 by 3 config
 
 #let config = config16by9

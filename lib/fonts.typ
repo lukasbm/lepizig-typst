@@ -1,10 +1,19 @@
-#let TitleFontSize = 30pt
-#let SecondFontSize = 22pt
-#let FooterFontSize = 10pt
-#let TextBaseLineSkip = 0.65em
-#let TextFontSize = 20pt
-#let SmallFontSize = 16pt
+// regular font sizes
+#let TitleFontSize = 28pt
+#let SubtitleFontSize = 18pt
+#let HeaderFontSize = 20pt
+#let SubheaderFontSize = 14pt
+#let TextFontSize = 18pt
+#let SmallTextFontSize = 16pt
+#let HeaderFontSize = 12pt
+#let FooterFontSize = 12pt
+#let DateFontSize = 16pt
+#let SlideNumberFontSize = 9pt
 
-// only use Regular, Italic, Bold font
-#let FontFamily = "FAUSans Office"
-// TODO: also add Roboto as backup
+// table font sizes
+#let TableHeaderFontSize = 14pt
+#let TableFirstColumnFontSize = 14pt
+#let TableContentFontSize = 12pt
+#let TableLinesThickness = 1pt
+
+#let FontFamily = ("Arial", "Liberation Sans")

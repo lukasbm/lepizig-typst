@@ -2,8 +2,8 @@
 
 ## Local Package
 
-`local-package.typ` is an example that shows how you can use this template to write a document outside of this repository.
-This assume you have installed the package using the included python script
+`local-package.typ` is an example that shows how you can use this template to write a document outside this repository.
+This assumes you have installed the package using the included python script
 
 You can use it as follows:
 

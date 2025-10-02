@@ -21,15 +21,13 @@ The following command will help you do this:
 
 ## Sources
 
-- <https://www.intern.fau.de/kommunikation-und-marke/corporate-design/fau-schrift/>
-- <https://www.doc.zuv.fau.de//M/Styleguide/FAU_Styleguide-Essentials_v26_2022-07-14.pdf>
-- <https://www.intern.fau.de/kommunikation-und-marke/vorlagen/praesentationsvorlagen-powerpoint>
-- <https://www.wordpress.rrze.fau.de/entwicklung/design/schriften/>
-- <https://www.intern.fau.de/kommunikation-und-marke/corporate-design/fau-logo/>
+- https://intranet.uni-leipzig.de/rektorat/universitaetskommunikation/service/corporate-design.html
+- https://www.uni-leipzig.de/universitaet/service/medien-und-kommunikation/corporate-design
 
 ### Fonts
 
-- FAU Sans Office (kommerzielle Lizenz, nur für interne Zwecke)
+- Futura (for headers and captions)
+- Arial (for text content)
 
 ### Custom Slide Types
 

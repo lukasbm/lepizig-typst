@@ -47,7 +47,7 @@ def copy_files(source_dir: str, target_dir: str) -> None:
     )
     # entrypoint
     copy(
-        os.path.join(source_dir, "fau-typst.typ"),
+        os.path.join(source_dir, "leipzig-typst.typ"),
         target_dir,
     )
     # manifest

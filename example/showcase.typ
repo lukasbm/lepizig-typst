@@ -1,7 +1,6 @@
 #import "@preview/polylux:0.4.0": toolbox
-#import "../fau-typst.typ": tech-theme, main
-// #import "@local/fau-typst:0.0.1": tech-theme, main
-#import tech-theme: *
+#import "../leipzig-typst.typ": main
+#import main: *
 
 #show: main.setup-theme.with(
   aspect-ratio: "16-9",
@@ -38,7 +37,7 @@
 
   ```typst
     #import "@preview/polylux:0.4.0": *
-    #import "../fau-typst.typ": nat-theme, main
+    #import "../leipzig-typst.typ": nat-theme, main
     #import nat-theme: *
 
     #show: main.setup-theme.with(
@@ -97,11 +96,11 @@
 
   Use any environment (like grid) to shape and align blocks.
 
-  #grid(columns: (1fr, 1fr), gutter: 2em, fau-block()[
-    smaller block (no title)
-  ], fau-block(title: "hey there")[
-    smaller block (with title)
-  ])
+  // #grid(columns: (1fr, 1fr), gutter: 2em, fau-block()[
+  //   smaller block (no title)
+  // ], fau-block(title: "hey there")[
+  //   smaller block (with title)
+  // ])
 ]
 
 #slide(

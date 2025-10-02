@@ -1,6 +1,3 @@
-# fau template (local dev)
-fau-beamer*
-
 # pdf files (as typst does not support them)
 *.pdf
 

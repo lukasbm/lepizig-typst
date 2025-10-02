@@ -1,11 +1,12 @@
-# FAU Typst theme
+# Leipzig Typst theme
 
-:rocket: the FAU style, but in *typst*.
-Inspired by [FAU beamer](https://github.com/FAU-AMMN/fau-beamer)
+:rocket: the Leipzig style, but in *typst*.
+Inspired by [Leipzig Beamer](https://github.com/bmondal94/Leipzig-Beamer-Template)
 
 ## :gear: Prerequisites
 
-- [`FAUSans Office` font family](https://www.intern.fau.de/kommunikation-und-marke/corporate-design/fau-schrift/) installed
+- Arial font family (Liberation Sans as fallback)
+- Futura font family (Jost as fallback)
 - `typst >= 0.12.0` compiler installed
 - `git` and `python3` installed
 
@@ -16,8 +17,8 @@ This theme will not be published in the package repository of typst due to distr
 However you can easily install it locally as follows:
 
 ```bash
-git clone git@github.com:lukasbm/fau-typst.git
-cd fau-typst
+git clone git@github.com:lukasbm/leipzig-typst.git
+cd leipzig-typst
 # make sure you execute the python script from the project root!
 python3 install.py  # run the cross-platform install script (just copies the source files to the right location)
 ```
@@ -30,8 +31,7 @@ The default setup will look like this:
 
 ```typst
 #import "@preview/polylux:0.4.0": *
-#import "@local/fau-typst:0.0.1": <institution>-theme, main
-#import <intitution>-theme: *  // import everything from the theme (slide types)
+#import "@local/leipzig-typst:0.0.1": leipzig-theme, main
 
 // initialize the template with this function (important!)
 #show: main.setup-theme.with(
@@ -39,13 +39,8 @@ The default setup will look like this:
   short-title: "Test Document",
   short-date: datetime.today(),
   short-organization: "Lab1",
-  institution: "FAU",
 )
 ```
-
-Where `<institution>` can be replaced with either: `fau`, `nat`, `phil`, `rw`, `tech`, `med`.
-Just changing the import statement will update the entire theme.
-No need for more complicated settings!
 
 You're ready to get going!
 Write your first presentation. For example like this:
@@ -66,7 +61,7 @@ Write your first presentation. For example like this:
 )
 
 #slide(title: "Introduction", subtitle: "What is this?")[
-  This file demonstrates the usage of the FAU theme for typst.
+  This file demonstrates the usage of the Leipzig theme for typst.
 ]
 ```
 
@@ -89,5 +84,4 @@ TODO
 
 In case there are inexplicable compiler errors, try redownloading the dependency packages (polylux).
 First delete it from [the cache where it is saved](https://docs.rs/dirs/latest/dirs/fn.cache_dir.html).
-(e.g. `rm -rf ~/.cache/typst/packages/preview/polylux` on linux)
-Then try again
+(e.g. `rm -rf ~/.cache/typst/packages/preview/polylux` on linux) then try again.

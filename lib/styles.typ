@@ -1,6 +1,8 @@
 #import "util.typ": *
 #import "components.typ": *
 
+// mostly wrapping default elements like lists with different show rules
+
 #let styled-link(theme) = body => {
   show link: set text(fill: theme.BaseColor)
 

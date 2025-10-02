@@ -4,6 +4,8 @@
 #import "@preview/polylux:0.4.0": toolbox, slide as polylux-slide
 #import "styles.typ": *
 
+// master slide templates are in here
+
 
 #let title-slide(
   title: "Title",
